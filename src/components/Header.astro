@@ -1,22 +1,26 @@
 ---
 import Logo from './Logo.astro';
+
+// On the legal pages these anchors must point back at the sales page.
+const onHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
+const to = (hash: string) => (onHome ? hash : `/${hash}`);
 ---
 <header class="sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur-sm">
   <div class="wrap flex h-[58px] items-center justify-between gap-3">
-    <a href="#top" aria-label="ArthroLive home" class="shrink-0">
+    <a href={to('#top')} aria-label="ArthroLive home" class="shrink-0">
       <Logo class="h-6 w-auto sm:h-7" />
     </a>
 
     <nav aria-label="Primary" class="hidden md:block">
       <ul class="flex items-center gap-7 text-[15px] font-medium text-ink-muted">
-        <li><a href="#benefits" class="hover:text-teal">Benefits</a></li>
-        <li><a href="#how-to-use" class="hover:text-teal">How to Use</a></li>
-        <li><a href="#faqs" class="hover:text-teal">FAQs</a></li>
+        <li><a href={to('#benefits')} class="hover:text-teal">Benefits</a></li>
+        <li><a href={to('#how-to-use')} class="hover:text-teal">How to Use</a></li>
+        <li><a href={to('#faqs')} class="hover:text-teal">FAQs</a></li>
       </ul>
     </nav>
 
     <a
-      href="#packages"
+      href={to('#packages')}
       data-track-cta="header"
       class="btn-primary !min-h-[40px] !px-5 !text-[15px] !shadow-none"
     >Order Now</a>

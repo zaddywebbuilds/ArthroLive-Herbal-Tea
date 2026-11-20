@@ -5,6 +5,7 @@ import { site } from '../config/site';
 
 const { phone, whatsapp, email, hours, address } = site.contact;
 const year = new Date().getFullYear();
+const onHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
 ---
 
 <footer class="bg-teal-dark text-white/80">
@@ -55,7 +56,7 @@ const year = new Date().getFullYear();
         <li><a class="inline-block py-1.5 hover:text-white" href="/delivery-and-returns">Delivery &amp; returns policy</a></li>
         <li><a class="inline-block py-1.5 hover:text-white" href="/privacy-policy">Privacy policy</a></li>
         <li><a class="inline-block py-1.5 hover:text-white" href="/terms-and-conditions">Terms &amp; conditions</a></li>
-        <li><a class="inline-block py-1.5 hover:text-white" href="#faqs">Frequently asked questions</a></li>
+        <li><a class="inline-block py-1.5 hover:text-white" href={onHome ? '#faqs' : '/#faqs'}>Frequently asked questions</a></li>
       </ul>
     </div>
   </div>

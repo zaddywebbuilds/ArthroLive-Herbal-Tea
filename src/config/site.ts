@@ -52,10 +52,10 @@ export const site = {
     phone: '',            // e.g. '+233 20 000 0000'
     whatsapp: '',         // digits only, international format e.g. '233200000000'
     email: '',            // e.g. 'orders@arthrolive.com.gh'
-    hours: 'Monday to Saturday, 8am to 6pm',
+    hours: '',            // >>> CONFIRM <<< e.g. 'Monday to Saturday, 8am to 6pm'
     company: 'ArthroLive Ghana',
     address: '',          // e.g. 'Accra, Ghana'
-  },
+  } as Record<'phone' | 'whatsapp' | 'email' | 'hours' | 'company' | 'address', string>,
 
   /** ------------------------------------------------------------------
    *  DELIVERY & PAYMENT  >>> CONFIRM <<<
