@@ -143,13 +143,31 @@ export const site = {
 
   /** ------------------------------------------------------------------
    *  ORDER SUBMISSION
-   *  Set `endpoint` to a URL that accepts a JSON POST (Google Apps
-   *  Script, Formspree, your own API, a Make/Zapier webhook...).
+   *  Paste the Google Apps Script /exec URL here. See backend/SETUP.md.
    *  While it is empty the form will NOT pretend an order succeeded.
    *  ------------------------------------------------------------------ */
   order: {
-    endpoint: '',          // >>> CONFIRM <<<  e.g. 'https://script.google.com/macros/s/.../exec'
-    method: 'POST' as const,
+    endpoint: '',          // >>> CONFIRM <<<  e.g. 'https://script.google.com/macros/s/AKfy.../exec'
+
+    /**
+     * Content type for the POST body. The body is always JSON.
+     *
+     * 'text/plain;charset=utf-8' keeps the request "simple" so the browser
+     * sends no CORS preflight. Google Apps Script does not answer preflight
+     * requests, so this is REQUIRED for the Apps Script backend.
+     *
+     * Switch to 'application/json' only for a backend that handles CORS
+     * preflight itself (Formspree, your own API, a Make/Zapier webhook).
+     */
+    contentType: 'text/plain;charset=utf-8',
+
+    /**
+     * Must match SHARED_SECRET in backend/orders.gs. Leave both empty to
+     * skip the check. This only filters out casual bots: it is visible in
+     * the page source, so it is not authentication.
+     */
+    secret: '',
+
     /** Minimum seconds a visitor must spend before a submit is accepted. */
     minFillSeconds: 3,
   },

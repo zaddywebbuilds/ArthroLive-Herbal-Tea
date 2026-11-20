@@ -16,7 +16,7 @@ The site deliberately does not invent any of it.
 | What | Where | Status |
 |---|---|---|
 | Contact phone / WhatsApp / email | `site.contact` | **empty** — the footer hides the block until these are filled in |
-| Order endpoint | `site.order.endpoint` | **empty** — the form refuses to submit and says so rather than faking success |
+| Order endpoint | `site.order.endpoint` | **empty** — see [backend/SETUP.md](backend/SETUP.md); until it is set the form refuses to submit and says so rather than faking success |
 | Prices (GH₵270 / 470 / 670) | `site.packages` | from the brief, **needs your confirmation** |
 | Free delivery nationwide | `site.delivery.freeNationwide` | currently `true`, **confirm you can honour this** |
 | Delivery timeline | `site.delivery.timeline` | empty, so the page says the team confirms the schedule |
@@ -38,29 +38,26 @@ npm run preview  # serve the built site
 
 ## Connecting the order form
 
-Set `site.order.endpoint` to any URL that accepts a JSON `POST`. A Google Apps Script
-web app, Formspree, a Make/Zapier webhook or your own API all work. The payload is:
+Orders go into a Google Sheet via a free Google Apps Script web app. The script
+is in [`backend/orders.gs`](backend/orders.gs) and the step-by-step guide is in
+[`backend/SETUP.md`](backend/SETUP.md). Roughly: create a sheet, paste the script,
+deploy it as a web app, paste the `/exec` URL into `order.endpoint`.
 
-```json
-{
-  "package": { "id": "double", "name": "Double Pack", "teaQty": 2, "balmQty": 2, "price": 470 },
-  "delivery": { "fee": 0, "method": "Pay on delivery" },
-  "total": 470,
-  "currency": "GHS",
-  "customer": {
-    "fullName": "...", "phone": "+233...", "altPhone": "",
-    "region": "...", "city": "...", "address": "...", "landmark": "..."
-  },
-  "meta": { "submittedAt": "ISO-8601", "page": "https://..." }
-}
-```
+The body is posted as `text/plain` on purpose. Apps Script does not answer CORS
+preflight requests, so that keeps it a "simple" request. The payload is still
+JSON. Switch `order.contentType` to `application/json` only if you move to a
+backend that handles CORS itself.
 
-Phone numbers are normalised to `+233XXXXXXXXX` before they are sent. Until an endpoint
-is set, a valid submission shows an error explaining the order was **not** sent; it never
-shows a false confirmation.
+Until an endpoint is set, a valid submission shows an error explaining the order
+was **not** sent; it never shows a false confirmation. The same applies if the
+backend rejects the order or the network fails.
 
-Form protection: a honeypot field, a minimum fill time, and a one-submission lock that
-prevents duplicate orders from repeated taps.
+Form protection: a honeypot field, a minimum fill time, an optional shared secret,
+and a one-submission lock that prevents duplicate orders from repeated taps.
+
+Set `contact.whatsapp` and an "Order on WhatsApp" link appears under the submit
+button, prefilled with the package the visitor selected. It stays hidden while
+that field is empty.
 
 ## Tracking
 
