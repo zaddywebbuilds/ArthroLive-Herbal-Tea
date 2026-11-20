@@ -16,19 +16,35 @@ interface Props {
 const { step, name, size, type, description, points, image, alt } = Astro.props;
 ---
 <article class="card flex flex-col">
-  <Img name={image} alt={alt} ratio="4/3" sizes="(min-width: 768px) 44vw, 100vw" />
-  <div class="flex flex-1 flex-col p-4 sm:p-5">
-    <div class="flex items-center gap-2">
+  <!-- Mobile: picture beside the title so the card stays short.
+       Desktop: full-width photo above the text. -->
+  <div class="flex items-center gap-3 p-3 sm:block sm:p-0">
+    <Img
+      name={image}
+      alt={alt}
+      ratio="1/1"
+      sizes="(min-width: 640px) 44vw, 104px"
+      class="w-[104px] shrink-0 rounded-[10px] sm:!aspect-[16/10] sm:w-full sm:rounded-none"
+    />
+    <div class="min-w-0 sm:hidden">
+      <span class="rounded-full bg-green-soft px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-green">{step}</span>
+      <h3 class="mt-1.5 text-[1.0625rem] font-extrabold leading-tight text-teal-dark">{name}</h3>
+      <p class="text-[13px] font-semibold text-teal">{type} &middot; {size}</p>
+    </div>
+  </div>
+
+  <div class="flex flex-1 flex-col px-3 pb-3 sm:p-5">
+    <div class="hidden items-center gap-2 sm:flex">
       <span class="rounded-full bg-green-soft px-2.5 py-0.5 text-[12px] font-bold uppercase tracking-wide text-green">{step}</span>
       <span class="text-[13px] font-semibold text-ink-muted">{size}</span>
     </div>
-    <h3 class="mt-2 text-xl font-extrabold text-teal-dark">{name}</h3>
-    <p class="mt-1 text-[14px] font-semibold text-teal">{type}</p>
-    <p class="mt-2 text-[15px] text-ink-muted">{description}</p>
-    <ul class="mt-3 space-y-1.5 border-t border-line pt-3">
+    <h3 class="mt-2 hidden text-xl font-extrabold text-teal-dark sm:block">{name}</h3>
+    <p class="mt-1 hidden text-[14px] font-semibold text-teal sm:block">{type}</p>
+    <p class="text-[14.5px] text-ink-muted sm:mt-2 sm:text-[15px]">{description}</p>
+    <ul class="mt-2.5 space-y-1 border-t border-line pt-2.5 sm:mt-3 sm:space-y-1.5 sm:pt-3">
       {points.map((p) => (
-        <li class="flex gap-2 text-[14.5px] leading-snug">
-          <Icon name="check" size={17} class="mt-0.5 shrink-0 text-green" stroke={2.5} />
+        <li class="flex gap-2 text-[14px] leading-snug sm:text-[14.5px]">
+          <Icon name="check" size={16} class="mt-0.5 shrink-0 text-green" stroke={2.5} />
           <span>{p}</span>
         </li>
       ))}

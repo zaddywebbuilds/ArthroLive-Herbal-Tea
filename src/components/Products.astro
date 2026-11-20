@@ -5,30 +5,25 @@ import { site } from '../config/site';
 ---
 <section id="products" class="section-y bg-cream">
   <div class="wrap">
-    <div class="grid gap-5 md:grid-cols-[1fr_1.05fr] md:items-center md:gap-9">
+    <div class="grid gap-4 md:grid-cols-[1fr_1.05fr] md:items-center md:gap-9">
       <Img
         name="arthrolive-tea-and-balm-pack-angled"
         alt="ArthroLive Herbal Tea pouch and ArthroLive Herbal Balm jar photographed together at a three-quarter angle"
         ratio="1/1"
         sizes="(min-width: 768px) 420px, 100vw"
-        class="rounded-card border border-line bg-white"
+        class="hidden rounded-card border border-line bg-white md:block"
       />
       <div>
         <span class="eyebrow">The ArthroLive Routine</span>
         <h2 class="h-section mt-1.5 text-teal-dark">Two Products. One Simple Wellness Routine.</h2>
-        <p class="mt-3 max-w-[50ch] text-ink-muted">
-          ArthroLive brings together a herbal tea and a topical massage balm in one
-          convenient package. One you drink as part of your day. One you massage into the
-          areas that feel tight or sore.
-        </p>
-        <p class="mt-2.5 max-w-[50ch] text-ink-muted">
-          Nothing complicated to remember, and nothing that takes over your evening. It is
-          made to sit alongside the life you already live.
+        <p class="mt-2 max-w-[50ch] text-ink-muted">
+          One you drink as part of your day. One you massage into the areas that feel
+          tight or sore. Nothing complicated, and nothing that takes over your evening.
         </p>
       </div>
     </div>
 
-    <div class="mt-5 grid gap-3.5 md:mt-7 md:grid-cols-2 md:gap-5">
+    <div class="mt-3 grid gap-3 md:mt-6 md:grid-cols-2 md:gap-5">
       <ProductCard
         step="Drink"
         name={site.products.tea.name}

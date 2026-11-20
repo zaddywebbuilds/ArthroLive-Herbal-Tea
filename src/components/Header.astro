@@ -7,8 +7,8 @@ const here = Astro.url.pathname.replace(/\/$/, '');
 const onHome = here === BASE || here === '';
 const to = (hash: string) => (onHome ? hash : withBase('/') + hash);
 ---
-<header class="sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur-sm">
-  <div class="wrap flex h-[58px] items-center justify-between gap-3">
+<header class="sticky top-0 z-40 border-b border-line bg-white md:bg-white/95 md:backdrop-blur-sm">
+  <div class="wrap flex h-[52px] items-center justify-between gap-3 md:h-[58px]">
     <a href={to('#top')} aria-label="ArthroLive home" class="shrink-0">
       <Logo class="h-6 w-auto sm:h-7" />
     </a>

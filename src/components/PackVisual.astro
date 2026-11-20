@@ -3,15 +3,17 @@
  * Quantity illustration for a pricing card. We do not have three distinct
  * bundle photographs, so each card shows an accurate drawn count of the
  * pouches and jars it contains rather than repeating the same photo.
+ *
+ * Sizes down on narrow phones so a 3 + 3 pack still fits beside the price.
  */
 interface Props { tea: number; balm: number }
 const { tea, balm } = Astro.props;
 const pouches = Array.from({ length: tea });
 const jars = Array.from({ length: balm });
 ---
-<div class="flex items-end justify-center gap-1.5 rounded-[12px] bg-gradient-to-b from-teal-soft/80 to-white px-3 py-3.5">
+<div class="pack-visual flex shrink-0 items-end justify-center gap-1 rounded-[10px] bg-gradient-to-b from-teal-soft/80 to-white px-2 py-2 md:gap-1.5 md:px-3 md:py-3.5">
   {pouches.map((_, i) => (
-    <svg viewBox="0 0 34 52" width="30" height="46" aria-hidden="true" class="drop-shadow-sm" style={`margin-left:${i ? '-6px' : '0'}`}>
+    <svg viewBox="0 0 34 52" class="pouch drop-shadow-sm" aria-hidden="true" data-overlap={i ? 'y' : 'n'}>
       <rect x="2" y="6" width="30" height="44" rx="3" fill="#00565C" />
       <rect x="2" y="6" width="30" height="7" rx="2.5" fill="#003C40" />
       <circle cx="17" cy="26" r="7.5" fill="#FFF9ED" />
@@ -21,7 +23,7 @@ const jars = Array.from({ length: balm });
     </svg>
   ))}
   {jars.map((_, i) => (
-    <svg viewBox="0 0 34 36" width="30" height="32" aria-hidden="true" class="drop-shadow-sm" style={`margin-left:${i ? '-6px' : '2px'}`}>
+    <svg viewBox="0 0 34 36" class="jar drop-shadow-sm" aria-hidden="true" data-overlap={i ? 'y' : 'n'}>
       <rect x="3" y="10" width="28" height="24" rx="3" fill="#FFFFFF" stroke="#CFC6B5" stroke-width="1" />
       <rect x="1.5" y="3" width="31" height="8" rx="3" fill="#00565C" />
       <rect x="1.5" y="9.5" width="31" height="2" fill="#D4A017" />
@@ -30,3 +32,21 @@ const jars = Array.from({ length: balm });
     </svg>
   ))}
 </div>
+
+<style>
+  .pack-visual .pouch { width: 21px; height: 32px; }
+  .pack-visual .jar { width: 21px; height: 22px; margin-left: 1px; }
+  .pack-visual .pouch[data-overlap='y'],
+  .pack-visual .jar[data-overlap='y'] { margin-left: -5px; }
+
+  @media (width >= 400px) {
+    .pack-visual .pouch { width: 26px; height: 40px; }
+    .pack-visual .jar { width: 26px; height: 28px; }
+  }
+  @media (width >= 768px) {
+    .pack-visual .pouch { width: 30px; height: 46px; }
+    .pack-visual .jar { width: 30px; height: 32px; margin-left: 2px; }
+    .pack-visual .pouch[data-overlap='y'],
+    .pack-visual .jar[data-overlap='y'] { margin-left: -6px; }
+  }
+</style>

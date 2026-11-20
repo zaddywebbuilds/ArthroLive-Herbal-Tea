@@ -35,9 +35,9 @@ const reviews = site.showTestimonials ? site.testimonials : [];
         {reviews.length ? 'What Customers Are Saying' : 'What You Can Count On'}
       </h2>
       {!reviews.length && (
-        <p class="mt-2 text-ink-muted">
-          We only publish customer reviews once they have actually been given to us, so
-          here is what we can tell you for certain today.
+        <p class="mt-1.5 text-ink-muted">
+          We only publish customer reviews once they have actually been given to us. Here
+          is what we can tell you for certain today.
         </p>
       )}
     </div>
@@ -55,14 +55,14 @@ const reviews = site.showTestimonials ? site.testimonials : [];
       </ul>
     )}
 
-    <ul class="mt-4 grid gap-2.5 sm:grid-cols-2 sm:gap-3.5 lg:grid-cols-4">
+    <ul class="mt-3.5 grid grid-cols-2 gap-2.5 sm:gap-3.5 lg:grid-cols-4">
       {pillars.map((p) => (
-        <li class="card p-4">
-          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-green-soft text-green">
-            <Icon name={p.icon} size={20} />
+        <li class="card p-3 sm:p-4">
+          <span class="flex h-9 w-9 items-center justify-center rounded-full bg-green-soft text-green sm:h-10 sm:w-10">
+            <Icon name={p.icon} size={19} />
           </span>
-          <h3 class="mt-2.5 text-[15.5px] font-extrabold text-teal-dark">{p.title}</h3>
-          <p class="mt-1 text-[14.5px] leading-snug text-ink-muted">{p.body}</p>
+          <h3 class="mt-2 text-[14.5px] font-extrabold leading-tight text-teal-dark sm:text-[15.5px]">{p.title}</h3>
+          <p class="mt-1 text-[13px] leading-snug text-ink-muted sm:text-[14.5px]">{p.body}</p>
         </li>
       ))}
     </ul>

@@ -26,40 +26,37 @@ const moments = [
 ---
 <section class="section-y bg-teal-dark text-white">
   <div class="wrap">
-    <div class="grid gap-5 md:grid-cols-[1fr_1.15fr] md:items-center md:gap-9">
+    <div class="grid gap-3.5 md:grid-cols-[1fr_1.15fr] md:items-center md:gap-9">
       <Img
         name="tingling-feet-disturbed-sleep"
         alt="Older Ghanaian man sitting at his bedside in warm lamplight, easing a tingling foot"
-        ratio="4/3"
+        ratio="16/9"
         sizes="(min-width: 768px) 440px, 100vw"
-        class="rounded-card"
+        class="rounded-card md:!aspect-[4/3]"
       />
       <div>
         <span class="eyebrow !text-gold">The Real Cost</span>
         <h2 class="h-section mt-1.5 text-white">
           It's Not Just the Discomfort. It's What It Takes Away From Your Day.
         </h2>
-        <p class="mt-3 max-w-[52ch] text-white/80">
-          Perhaps you find yourself thinking twice before climbing stairs. You sit down
-          more often because standing for too long becomes uncomfortable.
-        </p>
-        <p class="mt-2.5 max-w-[52ch] text-white/80">
-          You want to sleep peacefully, enjoy time with your family and get through your
-          daily activities without constantly thinking about your aches.
+        <p class="mt-2 max-w-[52ch] text-white/80 md:mt-3">
+          You think twice before the stairs. You sit down more often. And all you really
+          want is to sleep peacefully, enjoy your family and get through the day without
+          constantly thinking about your aches.
         </p>
       </div>
     </div>
 
-    <ul class="mt-5 grid grid-cols-2 gap-2.5 md:mt-7 md:grid-cols-4 md:gap-4">
+    <ul class="mt-3.5 grid grid-cols-2 gap-2.5 md:mt-7 md:grid-cols-4 md:gap-4">
       {moments.map((m) => (
         <li class="overflow-hidden rounded-card bg-white/5 ring-1 ring-white/15">
           <Img
             name={m.image}
             alt={m.alt}
-            ratio="4/3"
+            ratio="3/2"
             sizes="(min-width: 768px) 270px, 46vw"
           />
-          <p class="px-2.5 py-2 text-[13px] font-medium leading-snug text-white/85 sm:px-3 sm:text-[14px]">
+          <p class="px-2.5 py-1.5 text-[12.5px] font-medium leading-snug text-white/85 sm:px-3 sm:py-2 sm:text-[14px]">
             {m.caption}
           </p>
         </li>

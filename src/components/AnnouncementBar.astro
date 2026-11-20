@@ -8,9 +8,9 @@ const items = [
 ].filter(Boolean) as { icon: string; text: string }[];
 ---
 <div class="bg-teal-dark text-white">
-  <div class="wrap flex flex-wrap items-center justify-center gap-x-5 gap-y-1 py-2 text-center text-[13px] font-medium">
+  <div class="wrap flex flex-wrap items-center justify-center gap-x-5 gap-y-1 py-1.5 text-center text-[12.5px] font-medium md:py-2 md:text-[13px]">
     {items.map((item, i) => (
-      <span class={`inline-flex items-center gap-1.5 whitespace-nowrap ${i > 1 ? 'hidden sm:inline-flex' : ''}`}>
+      <span class={`items-center gap-1.5 whitespace-nowrap ${i > 1 ? 'hidden sm:inline-flex' : 'inline-flex'}`}>
         <Icon name={item.icon} size={15} class="shrink-0 text-gold" />
         {item.text}
       </span>

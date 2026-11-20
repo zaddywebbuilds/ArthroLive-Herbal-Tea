@@ -44,26 +44,35 @@
   }
 }
 
-body {
-  font-family: var(--font-sans);
-  color: var(--color-ink);
-  background: #ffffff;
-  font-size: 1.0625rem;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+/*
+ * These MUST stay inside @layer base. Unlayered rules outrank every Tailwind
+ * utility, so an unlayered `img { height: auto }` would silently beat `h-full`
+ * and let ratio-cropped images overflow their box, and an unlayered heading
+ * `line-height` would beat `leading-*`.
+ */
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    background: #ffffff;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  p { text-wrap: pretty; }
+
+  img { max-width: 100%; height: auto; }
 }
 
-h1, h2, h3, h4, .font-display {
-  font-family: var(--font-display);
-  letter-spacing: -0.015em;
-  line-height: 1.15;
-  text-wrap: balance;
-}
-
-p { text-wrap: pretty; }
-
-img { max-width: 100%; height: auto; }
 
 /* Focus visibility for keyboard and screen-reader users */
 :focus-visible {
@@ -80,8 +89,8 @@ img { max-width: 100%; height: auto; }
 }
 
 @utility section-y {
-  padding-block: 24px;
-  @media (width >= 768px) { padding-block: 44px; }
+  padding-block: 18px;
+  @media (width >= 768px) { padding-block: 40px; }
 }
 
 /* Primary call to action */

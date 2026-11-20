@@ -8,6 +8,7 @@ const cards = [
     title: 'Preparing ArthroLive Herbal Tea',
     image: 'arthrolive-herbal-tea-preparation',
     alt: 'Hands holding a cup of freshly brewed ArthroLive herbal tea in a sunlit Ghanaian kitchen',
+    position: 'center 55%',
     steps: [
       'Prepare the tea according to the directions supplied on the pack.',
       'Allow the tea bag to steep for as long as the pack instructs.',
@@ -19,6 +20,7 @@ const cards = [
     title: 'Applying ArthroLive Herbal Balm',
     image: 'arthrolive-balm-application-knee',
     alt: 'Ghanaian woman seated at home massaging ArthroLive Herbal Balm into her knee',
+    position: 'center 78%',
     steps: [
       'Clean and dry the area of skin you want to massage.',
       'Take a small amount of balm onto your fingertips.',
@@ -28,29 +30,28 @@ const cards = [
   },
 ] as const;
 ---
-<section id="how-to-use" class="section-y bg-cream">
+<section id="how-to-use" class="section-y bg-cream scroll-mt-[60px]">
   <div class="wrap">
     <div class="max-w-[54ch]">
       <span class="eyebrow">How to Use</span>
       <h2 class="h-section mt-1.5 text-teal-dark">Make ArthroLive Part of Your Daily Routine</h2>
-      <p class="mt-2 text-ink-muted">
-        Always follow the directions printed on your own pack. They are the instructions
-        that matter.
+      <p class="mt-1.5 text-ink-muted">
+        Always follow the directions printed on your own pack.
       </p>
     </div>
 
-    <div class="mt-4 grid gap-3.5 md:grid-cols-2 md:gap-5">
+    <div class="mt-3.5 grid gap-3 md:grid-cols-2 md:gap-5">
       {cards.map((c) => (
         <article class="card flex flex-col">
-          <Img name={c.image} alt={c.alt} ratio="16/10" sizes="(min-width: 768px) 44vw, 100vw" />
-          <div class="flex flex-1 flex-col p-4 sm:p-5">
+          <Img name={c.image} alt={c.alt} ratio="5/2" position={c.position} sizes="(min-width: 768px) 44vw, 100vw" class="md:!aspect-[16/10]" />
+          <div class="flex flex-1 flex-col p-3.5 sm:p-5">
             <div class="flex items-center gap-2.5">
               <span class="flex h-8 w-8 items-center justify-center rounded-full bg-teal text-[15px] font-extrabold text-white">{c.n}</span>
               <h3 class="text-lg font-extrabold text-teal-dark">{c.title}</h3>
             </div>
-            <ol class="mt-3 space-y-2">
+            <ol class="mt-2.5 space-y-1.5 sm:mt-3 sm:space-y-2">
               {c.steps.map((s) => (
-                <li class="flex gap-2.5 text-[15px] leading-snug">
+                <li class="flex gap-2 text-[14px] leading-snug sm:gap-2.5 sm:text-[15px]">
                   <Icon name="chevron-right" size={17} class="mt-0.5 shrink-0 text-green" stroke={2.5} />
                   <span>{s}</span>
                 </li>
@@ -61,7 +62,7 @@ const cards = [
       ))}
     </div>
 
-    <p class="mt-3.5 flex items-start gap-2.5 rounded-card border border-gold/40 bg-gold-soft px-3.5 py-3 text-[14.5px] leading-snug text-ink">
+    <p class="mt-3 flex items-start gap-2.5 rounded-card border border-gold/40 bg-gold-soft px-3.5 py-2.5 text-[13.5px] leading-snug text-ink sm:py-3 sm:text-[14.5px]">
       <Icon name="triangle-alert" size={18} class="mt-0.5 shrink-0 text-gold" />
       <span>
         <strong class="font-bold">The balm is for external use only.</strong>

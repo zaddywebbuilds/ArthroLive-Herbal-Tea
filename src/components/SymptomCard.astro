@@ -16,13 +16,13 @@ const { label, image, alt, title, body, position = 'center' } = Astro.props;
   <Img
     name={image}
     alt={alt}
-    ratio="4/3"
+    ratio="3/2"
     position={position}
     sizes="(min-width: 1024px) 380px, (min-width: 640px) 44vw, 46vw"
   />
-  <div class="flex flex-1 flex-col p-3 sm:p-4">
+  <div class="flex flex-1 flex-col p-2.5 sm:p-4">
     <span class="eyebrow !text-[12.5px] !tracking-[0.07em] text-teal">{label}</span>
-    <h3 class="mt-1 text-[15px] font-extrabold text-teal-dark sm:text-[1.0625rem]">{title}</h3>
-    <p class="mt-1.5 text-[13.5px] leading-snug text-ink-muted sm:text-[15px] sm:leading-normal">{body}</p>
+    <h3 class="mt-0.5 text-[14.5px] font-extrabold leading-tight text-teal-dark sm:text-[1.0625rem]">{title}</h3>
+    <p class="mt-1 text-[13px] leading-snug text-ink-muted sm:text-[15px] sm:leading-normal">{body}</p>
   </div>
 </li>

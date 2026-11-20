@@ -1,7 +1,18 @@
 node_modules/
 dist/
 .astro/
+
+# Generated from source-images/ by `npm run images`
 public/images/
 public/arthrolive-ghana-social-share.jpg
+
+# Loose image files at the project root.
+# The masters live in source-images/ under their SEO filenames; OneDrive
+# sometimes restores the originally-named copies here. Ignored so 60MB of
+# duplicates never reach the repository.
+/*.png
+/*.jpg
+/*.jpeg
+
 .env
 .DS_Store

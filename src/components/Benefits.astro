@@ -17,15 +17,15 @@ const features = [
       <h2 class="h-section mt-1.5 text-teal-dark">Simple, Convenient Care for Everyday Comfort</h2>
     </div>
 
-    <ul class="mt-4 grid gap-2.5 sm:grid-cols-2 sm:gap-3.5 lg:grid-cols-3 lg:gap-4">
+    <ul class="mt-3.5 grid grid-cols-2 gap-2.5 sm:gap-3.5 lg:grid-cols-3 lg:gap-4">
       {features.map((f) => (
-        <li class="card flex gap-3 p-3.5 sm:p-4">
-          <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-teal-soft text-teal">
-            <Icon name={f.icon} size={20} />
+        <li class="card flex flex-col gap-2 p-3 sm:flex-row sm:gap-3 sm:p-4">
+          <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-teal-soft text-teal sm:h-10 sm:w-10">
+            <Icon name={f.icon} size={19} />
           </span>
           <div>
-            <h3 class="text-[15.5px] font-extrabold text-teal-dark">{f.title}</h3>
-            <p class="mt-1 text-[14.5px] leading-snug text-ink-muted">{f.body}</p>
+            <h3 class="text-[14.5px] font-extrabold leading-tight text-teal-dark sm:text-[15.5px]">{f.title}</h3>
+            <p class="mt-1 text-[13px] leading-snug text-ink-muted sm:text-[14.5px]">{f.body}</p>
           </div>
         </li>
       ))}
