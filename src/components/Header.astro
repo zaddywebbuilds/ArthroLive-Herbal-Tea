@@ -1,9 +1,11 @@
 ---
 import Logo from './Logo.astro';
+import { withBase, BASE } from '../lib/url';
 
 // On the legal pages these anchors must point back at the sales page.
-const onHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
-const to = (hash: string) => (onHome ? hash : `/${hash}`);
+const here = Astro.url.pathname.replace(/\/$/, '');
+const onHome = here === BASE || here === '';
+const to = (hash: string) => (onHome ? hash : withBase('/') + hash);
 ---
 <header class="sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur-sm">
   <div class="wrap flex h-[58px] items-center justify-between gap-3">

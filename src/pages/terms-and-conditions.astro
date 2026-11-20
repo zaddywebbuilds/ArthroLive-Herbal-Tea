@@ -1,6 +1,7 @@
 ---
 import Legal from '../layouts/Legal.astro';
 import { site, formatPrice } from '../config/site';
+import { withBase } from '../lib/url';
 ---
 
 <Legal
@@ -25,7 +26,7 @@ import { site, formatPrice } from '../config/site';
   )}
 
   <h2>Delivery</h2>
-  <p>We deliver within Ghana. Delivery timing depends on your location and the courier, and our team will confirm the expected schedule with you. See our <a class="text-teal underline" href="/delivery-and-returns">delivery and returns policy</a> for details.</p>
+  <p>We deliver within Ghana. Delivery timing depends on your location and the courier, and our team will confirm the expected schedule with you. See our <a class="text-teal underline" href={withBase("/delivery-and-returns")}>delivery and returns policy</a> for details.</p>
 
   <h2>Use of the products</h2>
   <p>ArthroLive Herbal Tea is a herbal beverage. ArthroLive Herbal Balm is a topical balm for external use on intact skin only. Use both products according to the directions printed on their labels.</p>

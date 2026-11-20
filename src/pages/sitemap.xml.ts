@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { site } from '../config/site';
+import { withBase } from '../lib/url';
 
 const pages = [
   { path: '/', priority: '1.0', changefreq: 'weekly' },
@@ -8,14 +9,15 @@ const pages = [
   { path: '/terms-and-conditions', priority: '0.3', changefreq: 'yearly' },
 ];
 
-export const GET: APIRoute = () => {
+export const GET: APIRoute = ({ site: astroSite }) => {
+  const origin = astroSite?.origin ?? site.url;
   const lastmod = new Date().toISOString().slice(0, 10);
   const body = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${pages
   .map(
     (p) => `  <url>
-    <loc>${new URL(p.path, site.url).href}</loc>
+    <loc>${new URL(withBase(p.path), origin).href}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>${p.changefreq}</changefreq>
     <priority>${p.priority}</priority>

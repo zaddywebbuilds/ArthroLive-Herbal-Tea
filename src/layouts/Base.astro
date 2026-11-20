@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 import { site } from '../config/site';
+import { withBase } from '../lib/url';
+import manifest from '../data/images.json';
 import Tracking from '../components/Tracking.astro';
 
 interface Props {
@@ -20,8 +22,14 @@ const {
   noindex = false,
 } = Astro.props;
 
-const canonical = new URL(path, site.url).href;
-const ogImage = new URL(site.meta.ogImage, site.url).href;
+// Astro.site is the deployed origin; Astro.url.pathname already carries the base.
+const origin = Astro.site?.origin ?? site.url;
+const canonical = new URL(withBase(path), origin).href;
+const ogImage = new URL(withBase(site.meta.ogImage), origin).href;
+
+const hero = manifest['arthrolive-herbal-tea-balm-ghana-hero'];
+const heroSrcset = hero.sources.map((s) => `${withBase(s.src)} ${s.w}w`).join(', ');
+const heroHref = withBase(hero.sources[hero.sources.length - 1].src);
 ---
 <!doctype html>
 <html lang="en-GH">
@@ -35,8 +43,8 @@ const ogImage = new URL(site.meta.ogImage, site.url).href;
     <meta name="theme-color" content="#00565C" />
     <meta name="geo.region" content="GH" />
 
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={withBase('/apple-touch-icon.png')} />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="ArthroLive Ghana" />
@@ -58,8 +66,8 @@ const ogImage = new URL(site.meta.ogImage, site.url).href;
       <link
         rel="preload"
         as="image"
-        href="/images/arthrolive-herbal-tea-balm-ghana-hero-1400.webp"
-        imagesrcset="/images/arthrolive-herbal-tea-balm-ghana-hero-400.webp 400w, /images/arthrolive-herbal-tea-balm-ghana-hero-700.webp 700w, /images/arthrolive-herbal-tea-balm-ghana-hero-1000.webp 1000w, /images/arthrolive-herbal-tea-balm-ghana-hero-1400.webp 1400w"
+        href={heroHref}
+        imagesrcset={heroSrcset}
         imagesizes="(min-width: 1024px) 560px, 100vw"
         fetchpriority="high"
       />

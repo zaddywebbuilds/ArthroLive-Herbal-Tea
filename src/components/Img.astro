@@ -4,6 +4,7 @@
  * Always emits width/height so the browser reserves space (no layout shift).
  */
 import manifest from '../data/images.json';
+import { withBase } from '../lib/url';
 
 interface Props {
   name: keyof typeof manifest;
@@ -29,8 +30,8 @@ const {
 const entry = manifest[name];
 if (!entry) throw new Error(`Unknown image "${String(name)}" - run \`npm run images\`.`);
 
-const srcset = entry.sources.map((s) => `${s.src} ${s.w}w`).join(', ');
-const fallback = entry.sources[entry.sources.length - 1].src;
+const srcset = entry.sources.map((s) => `${withBase(s.src)} ${s.w}w`).join(', ');
+const fallback = withBase(entry.sources[entry.sources.length - 1].src);
 const displayW = entry.sources[entry.sources.length - 1].w;
 const displayH = Math.round(displayW / entry.ratio);
 ---

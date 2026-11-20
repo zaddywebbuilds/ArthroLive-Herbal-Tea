@@ -17,15 +17,18 @@ import FinalCta from '../components/FinalCta.astro';
 import Footer from '../components/Footer.astro';
 import StickyCta from '../components/StickyCta.astro';
 import { site } from '../config/site';
+import { withBase } from '../lib/url';
 
-const img = (p: string) => new URL(p, site.url).href;
+const origin = Astro.site?.origin ?? site.url;
+const abs = (p: string) => new URL(withBase(p), origin).href;
+const HOME = abs('/');
 
 const organization = {
   '@type': 'Organization',
-  '@id': `${site.url}/#organization`,
+  '@id': `${HOME}#organization`,
   name: site.contact.company,
-  url: site.url,
-  logo: img('/favicon.svg'),
+  url: HOME,
+  logo: abs('/favicon.svg'),
   areaServed: { '@type': 'Country', name: 'Ghana' },
   ...(site.contact.phone || site.contact.email
     ? {
@@ -45,16 +48,16 @@ const organization = {
 
 const product = {
   '@type': 'Product',
-  '@id': `${site.url}/#product`,
+  '@id': `${HOME}#product`,
   name: 'ArthroLive Herbal Tea & Herbal Balm',
   brand: { '@type': 'Brand', name: 'ArthroLive' },
   category: 'Health & Wellness',
   description:
     'A two product wellness routine for everyday body comfort: ArthroLive Herbal Tea (20 tea bags) to drink and ArthroLive Herbal Balm (50g) for soothing topical massage.',
   image: [
-    img('/images/arthrolive-herbal-tea-balm-ghana-hero-1400.webp'),
-    img('/images/arthrolive-tea-and-balm-pack-angled-1254.webp'),
-    img('/images/arthrolive-herbal-balm-50g-open-jar-1254.webp'),
+    abs('/images/arthrolive-herbal-tea-balm-ghana-hero-1400.webp'),
+    abs('/images/arthrolive-tea-and-balm-pack-angled-1254.webp'),
+    abs('/images/arthrolive-herbal-balm-50g-open-jar-1254.webp'),
   ],
   isRelatedTo: [
     { '@type': 'Product', name: 'ArthroLive Herbal Tea', description: '20 herbal tea bags' },
@@ -75,7 +78,7 @@ const product = {
       price: p.price,
       priceCurrency: site.currency,
       availability: 'https://schema.org/InStock',
-      url: `${site.url}/?package=${p.id}`,
+      url: `${HOME}?package=${p.id}`,
       ...(site.delivery.freeNationwide
         ? {
             shippingDetails: {
@@ -91,7 +94,7 @@ const product = {
 
 const faqPage = {
   '@type': 'FAQPage',
-  '@id': `${site.url}/#faq`,
+  '@id': `${HOME}#faq`,
   mainEntity: faqs.map((f) => ({
     '@type': 'Question',
     name: f.q,
@@ -101,11 +104,11 @@ const faqPage = {
 
 const website = {
   '@type': 'WebSite',
-  '@id': `${site.url}/#website`,
-  url: site.url,
+  '@id': `${HOME}#website`,
+  url: HOME,
   name: 'ArthroLive Ghana',
   inLanguage: 'en-GH',
-  publisher: { '@id': `${site.url}/#organization` },
+  publisher: { '@id': `${HOME}#organization` },
 };
 
 const schema = { '@context': 'https://schema.org', '@graph': [organization, website, product, faqPage] };
