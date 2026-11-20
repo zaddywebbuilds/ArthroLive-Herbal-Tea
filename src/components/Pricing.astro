@@ -1,0 +1,42 @@
+---
+import PricingCard from './PricingCard.astro';
+import Img from './Img.astro';
+import Icon from './Icon.astro';
+import { site } from '../config/site';
+---
+<section id="packages" class="section-y bg-cream scroll-mt-[70px]">
+  <div class="wrap">
+    <div class="grid items-end gap-4 md:grid-cols-[1.3fr_1fr] md:gap-8">
+      <div>
+        <span class="eyebrow">Packages</span>
+        <h2 class="h-section mt-1.5 text-teal-dark">Choose Your ArthroLive Package</h2>
+        <p class="mt-2 max-w-[52ch] text-ink-muted">
+          Every package contains the complete routine: the herbal tea to drink and the
+          balm to massage. Pick the size that suits your household.
+        </p>
+        {site.delivery.freeNationwide && (
+          <p class="mt-2.5 inline-flex max-w-full items-start gap-2 rounded-[12px] bg-green-soft px-3 py-2 text-[14px] font-bold leading-snug text-green">
+            <Icon name="truck" size={16} class="mt-0.5 shrink-0" />
+            <span>Free delivery on every package, anywhere in Ghana</span>
+          </p>
+        )}
+      </div>
+      <Img
+        name="arthrolive-tea-and-balm-package-bundle"
+        alt="ArthroLive Herbal Tea pouch and Herbal Balm jar shown together as one complete package"
+        ratio="4/3"
+        sizes="(min-width: 768px) 340px, 100vw"
+        class="rounded-card border border-line bg-white"
+      />
+    </div>
+
+    <div class="mt-7 grid gap-4 md:grid-cols-3 md:gap-5">
+      {site.packages.map((pkg) => <PricingCard pkg={pkg} featured={Boolean(pkg.badge)} />)}
+    </div>
+
+    <p class="mt-3.5 text-center text-[13.5px] text-ink-muted">
+      Prices are in Ghana cedis and include delivery.
+      {site.delivery.payOnDelivery && ' You pay when your package arrives.'}
+    </p>
+  </div>
+</section>

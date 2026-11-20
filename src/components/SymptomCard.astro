@@ -1,0 +1,28 @@
+---
+import Img from './Img.astro';
+import manifest from '../data/images.json';
+
+interface Props {
+  label: string;
+  image: keyof typeof manifest;
+  alt: string;
+  title: string;
+  body: string;
+  position?: string;
+}
+const { label, image, alt, title, body, position = 'center' } = Astro.props;
+---
+<li class="card flex flex-col">
+  <Img
+    name={image}
+    alt={alt}
+    ratio="4/3"
+    position={position}
+    sizes="(min-width: 1024px) 380px, (min-width: 640px) 44vw, 46vw"
+  />
+  <div class="flex flex-1 flex-col p-3 sm:p-4">
+    <span class="eyebrow !text-[12.5px] !tracking-[0.07em] text-teal">{label}</span>
+    <h3 class="mt-1 text-[15px] font-extrabold text-teal-dark sm:text-[1.0625rem]">{title}</h3>
+    <p class="mt-1.5 text-[13.5px] leading-snug text-ink-muted sm:text-[15px] sm:leading-normal">{body}</p>
+  </div>
+</li>

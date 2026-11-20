@@ -1,0 +1,74 @@
+---
+import Img from './Img.astro';
+import Icon from './Icon.astro';
+
+const cards = [
+  {
+    n: '1',
+    title: 'Preparing ArthroLive Herbal Tea',
+    image: 'arthrolive-herbal-tea-preparation',
+    alt: 'Hands holding a cup of freshly brewed ArthroLive herbal tea in a sunlit Ghanaian kitchen',
+    steps: [
+      'Prepare the tea according to the directions supplied on the pack.',
+      'Allow the tea bag to steep for as long as the pack instructs.',
+      'Drink according to the recommended directions on the label.',
+    ],
+  },
+  {
+    n: '2',
+    title: 'Applying ArthroLive Herbal Balm',
+    image: 'arthrolive-balm-application-knee',
+    alt: 'Ghanaian woman seated at home massaging ArthroLive Herbal Balm into her knee',
+    steps: [
+      'Clean and dry the area of skin you want to massage.',
+      'Take a small amount of balm onto your fingertips.',
+      'Massage gently into the area until it is worked in.',
+      'Repeat as often as the product label specifies.',
+    ],
+  },
+] as const;
+---
+<section id="how-to-use" class="section-y bg-cream">
+  <div class="wrap">
+    <div class="max-w-[54ch]">
+      <span class="eyebrow">How to Use</span>
+      <h2 class="h-section mt-1.5 text-teal-dark">Make ArthroLive Part of Your Daily Routine</h2>
+      <p class="mt-2 text-ink-muted">
+        Always follow the directions printed on your own pack. They are the instructions
+        that matter.
+      </p>
+    </div>
+
+    <div class="mt-4 grid gap-3.5 md:grid-cols-2 md:gap-5">
+      {cards.map((c) => (
+        <article class="card flex flex-col">
+          <Img name={c.image} alt={c.alt} ratio="16/10" sizes="(min-width: 768px) 44vw, 100vw" />
+          <div class="flex flex-1 flex-col p-4 sm:p-5">
+            <div class="flex items-center gap-2.5">
+              <span class="flex h-8 w-8 items-center justify-center rounded-full bg-teal text-[15px] font-extrabold text-white">{c.n}</span>
+              <h3 class="text-lg font-extrabold text-teal-dark">{c.title}</h3>
+            </div>
+            <ol class="mt-3 space-y-2">
+              {c.steps.map((s) => (
+                <li class="flex gap-2.5 text-[15px] leading-snug">
+                  <Icon name="chevron-right" size={17} class="mt-0.5 shrink-0 text-green" stroke={2.5} />
+                  <span>{s}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <p class="mt-3.5 flex items-start gap-2.5 rounded-card border border-gold/40 bg-gold-soft px-3.5 py-3 text-[14.5px] leading-snug text-ink">
+      <Icon name="triangle-alert" size={18} class="mt-0.5 shrink-0 text-gold" />
+      <span>
+        <strong class="font-bold">The balm is for external use only.</strong>
+        Keep it away from the eyes, the inside of the mouth and nose, and other sensitive
+        areas. Do not apply it to broken or irritated skin. Keep both products out of reach
+        of children.
+      </span>
+    </p>
+  </div>
+</section>

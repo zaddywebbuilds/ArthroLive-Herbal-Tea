@@ -1,0 +1,42 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { site, formatPrice } from '../config/site';
+---
+
+<Legal
+  title="Terms & Conditions | ArthroLive Ghana"
+  heading="Terms & Conditions"
+  path="/terms-and-conditions"
+  description="The terms that apply when you order ArthroLive Herbal Tea and Herbal Balm through this website in Ghana."
+>
+  <p>These terms apply when you place an order for ArthroLive products through this website.</p>
+
+  <h2>Placing an order</h2>
+  <p>Submitting the order form is a request to buy, not a completed sale. Our team contacts you by phone to confirm your package, your address and the delivery before anything is dispatched. An order becomes final only after that confirmation.</p>
+
+  <h2>Prices</h2>
+  <p>All prices on this website are in Ghana cedis (GHS). The packages shown are {site.packages.map((p) => `${p.name} at ${formatPrice(p.price)}`).join(', ')}. Prices may change, and the price that applies to your order is the one we confirm with you on the phone.</p>
+
+  <h2>Payment</h2>
+  {site.delivery.payOnDelivery ? (
+    <p>Payment is made to the courier when your package arrives. No payment is collected on this website, and we will never ask you for card details, a PIN, a one-time password or a mobile money PIN over the phone.</p>
+  ) : (
+    <p>Our team will confirm the available payment options with you when we call about your order. We will never ask you for a PIN, a one-time password or a mobile money PIN over the phone.</p>
+  )}
+
+  <h2>Delivery</h2>
+  <p>We deliver within Ghana. Delivery timing depends on your location and the courier, and our team will confirm the expected schedule with you. See our <a class="text-teal underline" href="/delivery-and-returns">delivery and returns policy</a> for details.</p>
+
+  <h2>Use of the products</h2>
+  <p>ArthroLive Herbal Tea is a herbal beverage. ArthroLive Herbal Balm is a topical balm for external use on intact skin only. Use both products according to the directions printed on their labels.</p>
+  <p>These products are not a medicine, not a cure, and not a replacement for medical diagnosis or for any treatment your healthcare professional has prescribed. Nothing on this website should be taken as medical advice. If your symptoms are severe, persistent, unexplained or getting worse, have them assessed by a qualified healthcare professional.</p>
+
+  <h2>Cancelling an order</h2>
+  <p>You can cancel at any time before your package is dispatched by telling us when we call to confirm, or by contacting us using the details in the footer.</p>
+
+  <h2>Content on this website</h2>
+  <p>The text, photographs and branding on this website belong to {site.contact.company} and may not be copied or reused without permission. The lifestyle photographs on this page illustrate everyday life and are not customer results or evidence of any outcome.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about these terms can be sent to us using the contact details in the footer of this website.</p>
+</Legal>

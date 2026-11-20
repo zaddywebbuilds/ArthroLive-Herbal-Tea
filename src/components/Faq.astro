@@ -1,0 +1,84 @@
+---
+import { site, formatPrice } from '../config/site';
+
+// NOTE: `export` statements are hoisted out of the component scope by Astro,
+// so everything this list needs is computed inside it.
+export const faqs = [
+  {
+    q: 'What comes inside the ArthroLive package?',
+    a: 'Each ArthroLive pack contains two products: one ArthroLive Herbal Tea pouch of 20 tea bags, and one 50g jar of ArthroLive Herbal Balm. The larger packages simply contain more of the same two products.',
+  },
+  {
+    q: 'How do I prepare the herbal tea?',
+    a: 'Prepare it with hot water the way the directions on your pack describe, and let the tea bag steep for as long as the pack instructs. We do not publish our own brewing times here, because the directions printed on your pack are the ones to follow.',
+  },
+  {
+    q: 'How do I apply the herbal balm?',
+    a: 'Clean and dry the area first, take a small amount of balm onto your fingertips and massage it gently into the area. Repeat as often as the product label specifies.',
+  },
+  {
+    q: 'Can I use ArthroLive alongside medication my doctor prescribed?',
+    a: 'ArthroLive is a herbal tea and a topical balm, not a replacement for any treatment your doctor or pharmacist has given you. Keep taking what you have been prescribed, and show the ArthroLive pack and its ingredient list to your doctor or pharmacist so they can advise you about using it alongside your medication.',
+  },
+  {
+    q: 'Is the balm for external use only?',
+    a: 'Yes. The balm is for external use on clean, intact skin only. Keep it away from your eyes, the inside of your mouth and nose, and other sensitive areas, and do not apply it to broken or irritated skin. If your skin reacts to it, stop using it.',
+  },
+  {
+    q: 'Can I order for my parents or grandparents?',
+    a: 'Yes, and many people do. Place the order with the delivery address and landmark where they live, and give us a phone number that will be answered when we call to confirm. If that is your own number rather than theirs, add theirs as the alternative number so the courier can reach them on the day.',
+  },
+  {
+    q: 'How much does ArthroLive cost?',
+    a: `There are three packages: ${site.packages
+      .map((p) => `${p.name} ${formatPrice(p.price)}`)
+      .join(', ')}. Larger packages cost less per pack, and the prices on this page include delivery.`,
+  },
+  {
+    q: 'Do you deliver outside Accra?',
+    a: site.delivery.freeNationwide
+      ? 'Yes. We deliver to all 16 regions of Ghana, and delivery is free on every package on this page, whether you are in Accra, Kumasi, Tamale, Takoradi or a smaller town.'
+      : 'Yes, we deliver across Ghana. Your delivery charge is shown in the order summary once you choose your region.',
+  },
+  {
+    q: 'Can I pay when my order arrives?',
+    a: site.delivery.payOnDelivery
+      ? 'Yes. You pay the courier when your package reaches you. Nothing is collected on this website, and we never ask for card details online.'
+      : 'Our team will go through the payment options with you when we call to confirm your order.',
+  },
+  {
+    q: 'How long will delivery take?',
+    a:
+      (site.delivery.timeline ||
+        'Our team confirms the delivery schedule for your area when we call you about your order.') +
+      ' We call every customer before dispatch, so you will know when to expect the courier.',
+  },
+];
+---
+
+<section id="faqs" class="section-y bg-cream scroll-mt-[66px]">
+  <div class="wrap">
+    <div class="mx-auto max-w-[760px]">
+      <div class="text-center">
+        <span class="eyebrow">Questions</span>
+        <h2 class="h-section mt-1.5 text-teal-dark">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="mt-4 space-y-2">
+        {faqs.map((item, i) => (
+          <details class="group card px-4 py-0 open:bg-white" name="faq" open={i === 0}>
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-3 py-3.5 font-display text-[15.5px] font-extrabold text-teal-dark marker:content-none sm:text-[1.0625rem]">
+              {item.q}
+              <svg class="h-5 w-5 shrink-0 text-green transition-transform duration-200 group-open:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+                <path d="M12 5v14M5 12h14"></path>
+              </svg>
+            </summary>
+            <p class="border-t border-line pb-3.5 pt-3 text-[15px] leading-relaxed text-ink-muted">
+              {item.a}
+            </p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,45 @@
+---
+import Img from './Img.astro';
+
+const shots = [
+  { image: 'elderly-couple-morning-walk-ghana', alt: 'Older Ghanaian couple walking together along a quiet neighbourhood road in the morning', caption: 'Making time for your wellbeing.', span: 'md:col-span-2 md:row-span-2' },
+  { image: 'grandmother-playing-with-grandchildren', alt: 'Grandmother playing a ball game with her two grandchildren in a sunny compound', caption: 'Staying connected with family.', span: 'md:col-span-2' },
+  { image: 'older-woman-enjoying-herbal-tea-veranda', alt: 'Older Ghanaian woman enjoying a warm cup of tea on her sunlit veranda', caption: 'Enjoying the little moments.', span: '' },
+  { image: 'older-woman-walking-compound-ghana', alt: 'Older Ghanaian woman walking through her compound in the afternoon sun', caption: 'Moving at your own pace.', span: '' },
+  { image: 'market-trader-serving-customers-ghana', alt: 'Smiling Ghanaian market trader handing fresh tomatoes to a customer', caption: 'Getting through the working day.', span: 'md:col-span-2' },
+  { image: 'older-woman-resting-comfortably-at-home', alt: 'Older Ghanaian woman resting comfortably in a cane chair at home', caption: 'Resting without restlessness.', span: '' },
+] as const;
+---
+<section class="section-y bg-white">
+  <div class="wrap">
+    <div class="max-w-[58ch]">
+      <span class="eyebrow">Everyday Living</span>
+      <h2 class="h-section mt-1.5 text-teal-dark">Rediscover the Joy of Everyday Living</h2>
+      <p class="mt-2 text-ink-muted">
+        Your daily comfort matters, whether it's enjoying a morning walk, spending time
+        with your grandchildren or getting through your working day.
+      </p>
+    </div>
+
+    <ul class="mt-4 grid grid-cols-2 gap-2.5 md:grid-cols-4 md:gap-3.5">
+      {shots.map((s) => (
+        <li class={`group relative overflow-hidden rounded-card ${s.span}`}>
+          <Img
+            name={s.image}
+            alt={s.alt}
+            ratio={s.span.includes('row-span') ? '1/1' : '4/3'}
+            sizes="(min-width: 768px) 32vw, 48vw"
+          />
+          <div class="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 via-ink/40 to-transparent px-2.5 pb-2 pt-8 sm:px-3.5 sm:pb-2.5">
+            <p class="text-[12.5px] font-semibold leading-snug text-white sm:text-[14px]">{s.caption}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <p class="mt-3 text-[13px] italic text-ink-muted">
+      These are illustrative lifestyle photographs of everyday life in Ghana. They are not
+      customer results, before-and-after evidence or a depiction of any specific outcome.
+    </p>
+  </div>
+</section>

@@ -1,0 +1,37 @@
+---
+import Img from './Img.astro';
+import Icon from './Icon.astro';
+import manifest from '../data/images.json';
+
+interface Props {
+  step: string;
+  name: string;
+  size: string;
+  type: string;
+  description: string;
+  points: readonly string[];
+  image: keyof typeof manifest;
+  alt: string;
+}
+const { step, name, size, type, description, points, image, alt } = Astro.props;
+---
+<article class="card flex flex-col">
+  <Img name={image} alt={alt} ratio="4/3" sizes="(min-width: 768px) 44vw, 100vw" />
+  <div class="flex flex-1 flex-col p-4 sm:p-5">
+    <div class="flex items-center gap-2">
+      <span class="rounded-full bg-green-soft px-2.5 py-0.5 text-[12px] font-bold uppercase tracking-wide text-green">{step}</span>
+      <span class="text-[13px] font-semibold text-ink-muted">{size}</span>
+    </div>
+    <h3 class="mt-2 text-xl font-extrabold text-teal-dark">{name}</h3>
+    <p class="mt-1 text-[14px] font-semibold text-teal">{type}</p>
+    <p class="mt-2 text-[15px] text-ink-muted">{description}</p>
+    <ul class="mt-3 space-y-1.5 border-t border-line pt-3">
+      {points.map((p) => (
+        <li class="flex gap-2 text-[14.5px] leading-snug">
+          <Icon name="check" size={17} class="mt-0.5 shrink-0 text-green" stroke={2.5} />
+          <span>{p}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</article>

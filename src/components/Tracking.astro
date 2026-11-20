@@ -1,0 +1,66 @@
+---
+/**
+ * Analytics bootstrap. Nothing is injected unless an ID is set in
+ * src/config/site.ts, so the page ships zero third-party JS by default.
+ *
+ * Exposes window.alTrack(event, params) which fans a single event out to
+ * Meta Pixel, GA4 and GTM. Order-form fields (name, phone, address, region)
+ * are NEVER passed to it.
+ */
+import { site } from '../config/site';
+const { metaPixelId, ga4MeasurementId, gtmContainerId } = site.tracking;
+const any = Boolean(metaPixelId || ga4MeasurementId || gtmContainerId);
+---
+{gtmContainerId && (
+  <script is:inline define:vars={{ gtmContainerId }}>
+    (function (w, d, s, i) {
+      w.dataLayer = w.dataLayer || [];
+      w.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+      var f = d.getElementsByTagName(s)[0], j = d.createElement(s);
+      j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', gtmContainerId);
+  </script>
+)}
+
+{metaPixelId && (
+  <script is:inline define:vars={{ metaPixelId }}>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+    (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', metaPixelId);
+  </script>
+)}
+
+{ga4MeasurementId && (
+  <>
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${ga4MeasurementId}`}></script>
+    <script is:inline define:vars={{ ga4MeasurementId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', ga4MeasurementId);
+    </script>
+  </>
+)}
+
+<script is:inline define:vars={{ any }}>
+  (function () {
+    // Meta's standard event names, so the Pixel recognises them.
+    var META = { ViewContent: 1, InitiateCheckout: 1, Lead: 1, PageView: 1 };
+    window.alTrack = function (event, params) {
+      params = params || {};
+      try {
+        if (window.fbq && META[event]) window.fbq('track', event, params);
+        else if (window.fbq) window.fbq('trackCustom', event, params);
+        if (window.gtag) window.gtag('event', event, params);
+        if (window.dataLayer) window.dataLayer.push(Object.assign({ event: event }, params));
+      } catch (e) { /* tracking must never break the page */ }
+      if (!any && window.location.hostname === 'localhost') console.debug('[track]', event, params);
+    };
+    window.alTrack('ViewContent', { content_name: 'ArthroLive Tea and Balm', content_category: 'Wellness' });
+  })();
+</script>

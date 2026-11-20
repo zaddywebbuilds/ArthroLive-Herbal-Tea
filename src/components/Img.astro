@@ -1,0 +1,68 @@
+---
+/**
+ * Responsive WebP image backed by src/data/images.json.
+ * Always emits width/height so the browser reserves space (no layout shift).
+ */
+import manifest from '../data/images.json';
+
+interface Props {
+  name: keyof typeof manifest;
+  alt: string;
+  sizes?: string;
+  class?: string;
+  /** Crop the image into a fixed aspect ratio box. */
+  ratio?: string;
+  priority?: boolean;
+  position?: string;
+}
+
+const {
+  name,
+  alt,
+  sizes = '100vw',
+  class: className = '',
+  ratio,
+  priority = false,
+  position = 'center',
+} = Astro.props;
+
+const entry = manifest[name];
+if (!entry) throw new Error(`Unknown image "${String(name)}" - run \`npm run images\`.`);
+
+const srcset = entry.sources.map((s) => `${s.src} ${s.w}w`).join(', ');
+const fallback = entry.sources[entry.sources.length - 1].src;
+const displayW = entry.sources[entry.sources.length - 1].w;
+const displayH = Math.round(displayW / entry.ratio);
+---
+
+{ratio ? (
+  <div class={`relative overflow-hidden ${className}`} style={`aspect-ratio:${ratio}`}>
+    <img
+      src={fallback}
+      srcset={srcset}
+      sizes={sizes}
+      alt={alt}
+      width={displayW}
+      height={displayH}
+      loading={priority ? 'eager' : 'lazy'}
+      fetchpriority={priority ? 'high' : 'auto'}
+      decoding={priority ? 'sync' : 'async'}
+      class="absolute inset-0 h-full w-full object-cover"
+      style={`object-position:${position}`}
+    />
+  </div>
+) : (
+  <img
+    src={fallback}
+    srcset={srcset}
+    sizes={sizes}
+    alt={alt}
+    width={displayW}
+    height={displayH}
+    loading={priority ? 'eager' : 'lazy'}
+    fetchpriority={priority ? 'high' : 'auto'}
+    decoding={priority ? 'sync' : 'async'}
+    class={className}
+    style={`object-position:${position}`}
+  />
+)}

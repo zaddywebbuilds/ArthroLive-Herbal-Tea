@@ -1,0 +1,14 @@
+---
+/** ArthroLive wordmark, drawn to match the product packaging lockup. */
+interface Props { class?: string; light?: boolean }
+const { class: className = 'h-7 w-auto', light = false } = Astro.props;
+const arthro = light ? '#FFFFFF' : '#00565C';
+const live = light ? '#8FD3A8' : '#247541';
+---
+<svg class={className} viewBox="0 0 206 36" role="img" aria-label="ArthroLive" xmlns="http://www.w3.org/2000/svg">
+  <!-- leaf mark -->
+  <path d="M8 29C2.5 23.5 3 13 9.5 7.5 15.5 2.4 25 3 29.5 3.5c.6 5-.3 14-5.6 19.3C18.6 28.1 12.4 28.6 8 29Z" fill={live}/>
+  <path d="M26 7 9 27" stroke={light ? '#00565C' : '#FFF9ED'} stroke-width="2.1" stroke-linecap="round"/>
+  <path d="M20.5 9.5 19 17M14 15.5l-1.5 7" stroke={light ? '#00565C' : '#FFF9ED'} stroke-width="1.7" stroke-linecap="round" opacity=".85"/>
+  <text x="38" y="26.5" font-family="Manrope, sans-serif" font-size="25" font-weight="800" letter-spacing="-0.8" fill={arthro}>Arthro<tspan fill={live}>Live</tspan></text>
+</svg>

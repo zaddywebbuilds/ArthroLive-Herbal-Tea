@@ -1,0 +1,55 @@
+---
+import Icon from './Icon.astro';
+import PackVisual from './PackVisual.astro';
+import { formatPrice, type Package } from '../config/site';
+
+interface Props { pkg: Package; featured?: boolean }
+const { pkg, featured = false } = Astro.props;
+---
+<article
+  class={`relative flex flex-col rounded-card bg-white ${
+    featured
+      ? 'border-2 border-gold shadow-[var(--shadow-lift)] md:-my-2'
+      : 'border border-line shadow-[var(--shadow-soft)]'
+  }`}
+>
+  {pkg.badge && (
+    <span class="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-gold px-3.5 py-1 text-[12px] font-extrabold uppercase tracking-wide text-[#2a2003] shadow-sm">
+      {pkg.badge}
+    </span>
+  )}
+
+  <div class={`flex flex-1 flex-col p-4 sm:p-5 ${featured ? 'pt-6 sm:pt-7' : ''}`}>
+    <PackVisual tea={pkg.teaQty} balm={pkg.balmQty} />
+
+    <h3 class="mt-3 text-xl font-extrabold text-teal-dark">{pkg.name}</h3>
+    <p class="mt-0.5 text-[14.5px] font-semibold text-teal">
+      {pkg.teaQty} Herbal {pkg.teaQty > 1 ? 'Teas' : 'Tea'} + {pkg.balmQty} Herbal {pkg.balmQty > 1 ? 'Balms' : 'Balm'}
+    </p>
+    <p class="mt-1 text-[14px] text-ink-muted">{pkg.blurb}</p>
+
+    <p class="mt-3 flex items-baseline gap-2">
+      <span class="font-display text-[2rem] font-extrabold leading-none text-teal-dark">{formatPrice(pkg.price)}</span>
+    </p>
+    {pkg.saving > 0 ? (
+      <p class="mt-1 inline-flex w-fit items-center gap-1.5 rounded-full bg-green-soft px-2.5 py-1 text-[13px] font-bold text-green">
+        <Icon name="tag" size={14} stroke={2.4} />
+        Save {formatPrice(pkg.saving)}
+      </p>
+    ) : (
+      <p class="mt-1 text-[13px] text-ink-muted">{pkg.teaQty * 20} tea bags &middot; {pkg.balmQty * 50}g of balm</p>
+    )}
+
+    <ul class="mt-3 space-y-1.5 border-t border-line pt-3 text-[14px]">
+      <li class="flex gap-2"><Icon name="check" size={16} class="mt-0.5 shrink-0 text-green" stroke={2.5} /><span>{pkg.teaQty * 20} tea bags in total</span></li>
+      <li class="flex gap-2"><Icon name="check" size={16} class="mt-0.5 shrink-0 text-green" stroke={2.5} /><span>{pkg.balmQty} &times; 50g balm {pkg.balmQty > 1 ? 'jars' : 'jar'}</span></li>
+      <li class="flex gap-2"><Icon name="check" size={16} class="mt-0.5 shrink-0 text-green" stroke={2.5} /><span>Free delivery &amp; pay on delivery</span></li>
+    </ul>
+
+    <button
+      type="button"
+      data-select-package={pkg.id}
+      class={`mt-4 w-full ${featured ? 'btn-gold' : 'btn-primary'}`}
+    >{pkg.cta}</button>
+  </div>
+</article>

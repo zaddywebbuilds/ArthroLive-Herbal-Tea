@@ -1,0 +1,600 @@
+{
+  "aching-joints-interrupted-sleep": {
+    "width": 1448,
+    "height": 1086,
+    "ratio": 1.3333,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/aching-joints-interrupted-sleep-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/aching-joints-interrupted-sleep-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/aching-joints-interrupted-sleep-1000.webp"
+      },
+      {
+        "w": 1400,
+        "src": "/images/aching-joints-interrupted-sleep-1400.webp"
+      }
+    ]
+  },
+  "arthritis-knee-discomfort": {
+    "width": 1448,
+    "height": 1086,
+    "ratio": 1.3333,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/arthritis-knee-discomfort-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/arthritis-knee-discomfort-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/arthritis-knee-discomfort-1000.webp"
+      },
+      {
+        "w": 1400,
+        "src": "/images/arthritis-knee-discomfort-1400.webp"
+      }
+    ]
+  },
+  "arthrolive-balm-application-knee": {
+    "width": 1448,
+    "height": 1086,
+    "ratio": 1.3333,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/arthrolive-balm-application-knee-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/arthrolive-balm-application-knee-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/arthrolive-balm-application-knee-1000.webp"
+      },
+      {
+        "w": 1400,
+        "src": "/images/arthrolive-balm-application-knee-1400.webp"
+      }
+    ]
+  },
+  "arthrolive-herbal-balm-50g-open-jar": {
+    "width": 1254,
+    "height": 1254,
+    "ratio": 1,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/arthrolive-herbal-balm-50g-open-jar-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/arthrolive-herbal-balm-50g-open-jar-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/arthrolive-herbal-balm-50g-open-jar-1000.webp"
+      },
+      {
+        "w": 1254,
+        "src": "/images/arthrolive-herbal-balm-50g-open-jar-1254.webp"
+      }
+    ]
+  },
+  "arthrolive-herbal-tea-20-tea-bags": {
+    "width": 1254,
+    "height": 1254,
+    "ratio": 1,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/arthrolive-herbal-tea-20-tea-bags-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/arthrolive-herbal-tea-20-tea-bags-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/arthrolive-herbal-tea-20-tea-bags-1000.webp"
+      },
+      {
+        "w": 1254,
+        "src": "/images/arthrolive-herbal-tea-20-tea-bags-1254.webp"
+      }
+    ]
+  },
+  "arthrolive-herbal-tea-balm-ghana-hero": {
+    "width": 1672,
+    "height": 941,
+    "ratio": 1.7768,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/arthrolive-herbal-tea-balm-ghana-hero-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/arthrolive-herbal-tea-balm-ghana-hero-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/arthrolive-herbal-tea-balm-ghana-hero-1000.webp"
+      },
+      {
+        "w": 1400,
+        "src": "/images/arthrolive-herbal-tea-balm-ghana-hero-1400.webp"
+      }
+    ]
+  },
+  "arthrolive-herbal-tea-preparation": {
+    "width": 1254,
+    "height": 1254,
+    "ratio": 1,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/arthrolive-herbal-tea-preparation-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/arthrolive-herbal-tea-preparation-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/arthrolive-herbal-tea-preparation-1000.webp"
+      },
+      {
+        "w": 1254,
+        "src": "/images/arthrolive-herbal-tea-preparation-1254.webp"
+      }
+    ]
+  },
+  "arthrolive-tea-and-balm-pack-angled": {
+    "width": 1254,
+    "height": 1254,
+    "ratio": 1,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/arthrolive-tea-and-balm-pack-angled-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/arthrolive-tea-and-balm-pack-angled-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/arthrolive-tea-and-balm-pack-angled-1000.webp"
+      },
+      {
+        "w": 1254,
+        "src": "/images/arthrolive-tea-and-balm-pack-angled-1254.webp"
+      }
+    ]
+  },
+  "arthrolive-tea-and-balm-package-bundle": {
+    "width": 1280,
+    "height": 1169,
+    "ratio": 1.095,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/arthrolive-tea-and-balm-package-bundle-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/arthrolive-tea-and-balm-package-bundle-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/arthrolive-tea-and-balm-package-bundle-1000.webp"
+      },
+      {
+        "w": 1280,
+        "src": "/images/arthrolive-tea-and-balm-package-bundle-1280.webp"
+      }
+    ]
+  },
+  "burning-feet-at-night": {
+    "width": 1448,
+    "height": 1086,
+    "ratio": 1.3333,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/burning-feet-at-night-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/burning-feet-at-night-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/burning-feet-at-night-1000.webp"
+      },
+      {
+        "w": 1400,
+        "src": "/images/burning-feet-at-night-1400.webp"
+      }
+    ]
+  },
+  "difficulty-climbing-stairs-knee-pain": {
+    "width": 1448,
+    "height": 1086,
+    "ratio": 1.3333,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/difficulty-climbing-stairs-knee-pain-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/difficulty-climbing-stairs-knee-pain-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/difficulty-climbing-stairs-knee-pain-1000.webp"
+      },
+      {
+        "w": 1400,
+        "src": "/images/difficulty-climbing-stairs-knee-pain-1400.webp"
+      }
+    ]
+  },
+  "elderly-couple-morning-walk-ghana": {
+    "width": 1448,
+    "height": 1086,
+    "ratio": 1.3333,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/elderly-couple-morning-walk-ghana-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/elderly-couple-morning-walk-ghana-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/elderly-couple-morning-walk-ghana-1000.webp"
+      },
+      {
+        "w": 1400,
+        "src": "/images/elderly-couple-morning-walk-ghana-1400.webp"
+      }
+    ]
+  },
+  "ghanaian-couple-holding-arthrolive-tea-and-balm": {
+    "width": 1448,
+    "height": 1086,
+    "ratio": 1.3333,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/ghanaian-couple-holding-arthrolive-tea-and-balm-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/ghanaian-couple-holding-arthrolive-tea-and-balm-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/ghanaian-couple-holding-arthrolive-tea-and-balm-1000.webp"
+      },
+      {
+        "w": 1400,
+        "src": "/images/ghanaian-couple-holding-arthrolive-tea-and-balm-1400.webp"
+      }
+    ]
+  },
+  "grandmother-playing-with-grandchildren": {
+    "width": 1448,
+    "height": 1086,
+    "ratio": 1.3333,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/grandmother-playing-with-grandchildren-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/grandmother-playing-with-grandchildren-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/grandmother-playing-with-grandchildren-1000.webp"
+      },
+      {
+        "w": 1400,
+        "src": "/images/grandmother-playing-with-grandchildren-1400.webp"
+      }
+    ]
+  },
+  "lower-back-discomfort-standing-long-hours": {
+    "width": 1448,
+    "height": 1086,
+    "ratio": 1.3333,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/lower-back-discomfort-standing-long-hours-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/lower-back-discomfort-standing-long-hours-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/lower-back-discomfort-standing-long-hours-1000.webp"
+      },
+      {
+        "w": 1400,
+        "src": "/images/lower-back-discomfort-standing-long-hours-1400.webp"
+      }
+    ]
+  },
+  "market-trader-serving-customers-ghana": {
+    "width": 1448,
+    "height": 1086,
+    "ratio": 1.3333,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/market-trader-serving-customers-ghana-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/market-trader-serving-customers-ghana-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/market-trader-serving-customers-ghana-1000.webp"
+      },
+      {
+        "w": 1400,
+        "src": "/images/market-trader-serving-customers-ghana-1400.webp"
+      }
+    ]
+  },
+  "morning-joint-stiffness": {
+    "width": 1448,
+    "height": 1086,
+    "ratio": 1.3333,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/morning-joint-stiffness-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/morning-joint-stiffness-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/morning-joint-stiffness-1000.webp"
+      },
+      {
+        "w": 1400,
+        "src": "/images/morning-joint-stiffness-1400.webp"
+      }
+    ]
+  },
+  "older-woman-enjoying-herbal-tea-veranda": {
+    "width": 1448,
+    "height": 1086,
+    "ratio": 1.3333,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/older-woman-enjoying-herbal-tea-veranda-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/older-woman-enjoying-herbal-tea-veranda-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/older-woman-enjoying-herbal-tea-veranda-1000.webp"
+      },
+      {
+        "w": 1400,
+        "src": "/images/older-woman-enjoying-herbal-tea-veranda-1400.webp"
+      }
+    ]
+  },
+  "older-woman-resting-comfortably-at-home": {
+    "width": 1448,
+    "height": 1086,
+    "ratio": 1.3333,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/older-woman-resting-comfortably-at-home-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/older-woman-resting-comfortably-at-home-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/older-woman-resting-comfortably-at-home-1000.webp"
+      },
+      {
+        "w": 1400,
+        "src": "/images/older-woman-resting-comfortably-at-home-1400.webp"
+      }
+    ]
+  },
+  "older-woman-walking-compound-ghana": {
+    "width": 1448,
+    "height": 1086,
+    "ratio": 1.3333,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/older-woman-walking-compound-ghana-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/older-woman-walking-compound-ghana-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/older-woman-walking-compound-ghana-1000.webp"
+      },
+      {
+        "w": 1400,
+        "src": "/images/older-woman-walking-compound-ghana-1400.webp"
+      }
+    ]
+  },
+  "rheumatism-stiff-fingers-morning": {
+    "width": 1448,
+    "height": 1086,
+    "ratio": 1.3333,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/rheumatism-stiff-fingers-morning-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/rheumatism-stiff-fingers-morning-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/rheumatism-stiff-fingers-morning-1000.webp"
+      },
+      {
+        "w": 1400,
+        "src": "/images/rheumatism-stiff-fingers-morning-1400.webp"
+      }
+    ]
+  },
+  "sciatica-lower-back-leg-pain": {
+    "width": 1448,
+    "height": 1086,
+    "ratio": 1.3333,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/sciatica-lower-back-leg-pain-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/sciatica-lower-back-leg-pain-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/sciatica-lower-back-leg-pain-1000.webp"
+      },
+      {
+        "w": 1400,
+        "src": "/images/sciatica-lower-back-leg-pain-1400.webp"
+      }
+    ]
+  },
+  "shoulder-joint-pain-after-work": {
+    "width": 1448,
+    "height": 1086,
+    "ratio": 1.3333,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/shoulder-joint-pain-after-work-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/shoulder-joint-pain-after-work-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/shoulder-joint-pain-after-work-1000.webp"
+      },
+      {
+        "w": 1400,
+        "src": "/images/shoulder-joint-pain-after-work-1400.webp"
+      }
+    ]
+  },
+  "stiff-painful-fingers-opening-jar": {
+    "width": 1448,
+    "height": 1086,
+    "ratio": 1.3333,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/stiff-painful-fingers-opening-jar-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/stiff-painful-fingers-opening-jar-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/stiff-painful-fingers-opening-jar-1000.webp"
+      },
+      {
+        "w": 1400,
+        "src": "/images/stiff-painful-fingers-opening-jar-1400.webp"
+      }
+    ]
+  },
+  "swollen-knee-joint-inflammation": {
+    "width": 1448,
+    "height": 1086,
+    "ratio": 1.3333,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/swollen-knee-joint-inflammation-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/swollen-knee-joint-inflammation-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/swollen-knee-joint-inflammation-1000.webp"
+      },
+      {
+        "w": 1400,
+        "src": "/images/swollen-knee-joint-inflammation-1400.webp"
+      }
+    ]
+  },
+  "tingling-feet-disturbed-sleep": {
+    "width": 1448,
+    "height": 1086,
+    "ratio": 1.3333,
+    "sources": [
+      {
+        "w": 400,
+        "src": "/images/tingling-feet-disturbed-sleep-400.webp"
+      },
+      {
+        "w": 700,
+        "src": "/images/tingling-feet-disturbed-sleep-700.webp"
+      },
+      {
+        "w": 1000,
+        "src": "/images/tingling-feet-disturbed-sleep-1000.webp"
+      },
+      {
+        "w": 1400,
+        "src": "/images/tingling-feet-disturbed-sleep-1400.webp"
+      }
+    ]
+  }
+}

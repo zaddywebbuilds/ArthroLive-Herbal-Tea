@@ -1,0 +1,76 @@
+---
+import SymptomCard from './SymptomCard.astro';
+import Img from './Img.astro';
+
+const cards = [
+  {
+    label: 'Arthritis',
+    image: 'arthritis-knee-discomfort',
+    alt: 'Older Ghanaian woman sitting on a sofa holding her painful knee',
+    title: 'When Your Knees Make Every Step Difficult',
+    body: 'Standing up, walking and climbing stairs can become uncomfortable when joints feel stiff and tender.',
+  },
+  {
+    label: 'Joint Pain',
+    image: 'shoulder-joint-pain-after-work',
+    alt: 'Ghanaian market trader rubbing a sore shoulder at her vegetable stall',
+    title: 'When Your Joints Ache After Everyday Activities',
+    body: 'Even a normal day of working, walking or standing can leave your shoulders, knees and other joints feeling sore.',
+  },
+  {
+    label: 'Rheumatism',
+    image: 'rheumatism-stiff-fingers-morning',
+    alt: 'Older woman at her kitchen table gently easing stiff fingers in the morning',
+    title: 'When Your Body Feels Stiff Every Morning',
+    body: 'Getting out of bed, bending your fingers or moving around may take longer than it used to.',
+  },
+  {
+    label: 'Sciatica',
+    image: 'sciatica-lower-back-leg-pain',
+    alt: 'Ghanaian man holding his lower back and thigh as discomfort travels down his leg',
+    title: 'When Discomfort Travels From Your Back Down Your Leg',
+    body: 'Shooting or radiating discomfort can make sitting, standing and walking difficult.',
+  },
+  {
+    label: 'Neuropathy',
+    image: 'burning-feet-at-night',
+    alt: 'Man sitting on the edge of his bed at night rubbing a burning, tingling foot',
+    title: 'When Your Feet Burn Even at Night',
+    body: 'Burning, tingling, numbness and unusual sensations can make it difficult to relax.',
+  },
+  {
+    label: 'Inflammation',
+    image: 'swollen-knee-joint-inflammation',
+    alt: 'Close-up of swollen, tender knee joints of an older Ghanaian woman seated at home',
+    title: 'When Your Joints Feel Swollen and Tender',
+    body: 'Swelling and tenderness can interfere with everyday movement and make ordinary tasks uncomfortable.',
+  },
+] as const;
+---
+<section id="symptoms" class="section-y bg-white">
+  <div class="wrap">
+    <div class="grid items-center gap-4 md:grid-cols-[1.4fr_1fr] md:gap-8">
+      <div>
+        <span class="eyebrow">Does This Sound Familiar?</span>
+        <h2 class="h-section mt-1.5 text-teal-dark">
+          Some Days, the Hardest Part Isn't the Pain Itself.
+        </h2>
+        <p class="mt-2 max-w-[56ch] text-ink-muted">
+          It's how much it interrupts the things you need and love to do. If any of these
+          feel like your own day, you are far from alone.
+        </p>
+      </div>
+      <Img
+        name="morning-joint-stiffness"
+        alt="Older Ghanaian man sitting on the edge of his bed, resting his hands on stiff knees before standing"
+        ratio="16/10"
+        sizes="(min-width: 768px) 360px, 100vw"
+        class="rounded-card border border-line"
+      />
+    </div>
+
+    <ul class="mt-5 grid grid-cols-2 gap-2.5 sm:gap-3.5 lg:grid-cols-3 lg:gap-5">
+      {cards.map((c) => <SymptomCard {...c} />)}
+    </ul>
+  </div>
+</section>

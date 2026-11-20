@@ -1,0 +1,27 @@
+---
+import Img from './Img.astro';
+import Icon from './Icon.astro';
+---
+<section class="section-y bg-teal">
+  <div class="wrap grid items-center gap-5 md:grid-cols-[1fr_1fr] md:gap-10">
+    <Img
+      name="ghanaian-couple-holding-arthrolive-tea-and-balm"
+      alt="Smiling older Ghanaian couple at home holding the ArthroLive Herbal Tea pouch and Herbal Balm jar"
+      ratio="4/3"
+      sizes="(min-width: 768px) 500px, 100vw"
+      class="rounded-card"
+    />
+    <div class="text-white">
+      <span class="eyebrow !text-gold">One Last Thing</span>
+      <h2 class="h-section mt-1.5 text-white">Make Your Everyday Comfort a Priority</h2>
+      <p class="mt-3 max-w-[46ch] text-white/85">
+        Take a moment to care for yourself, or for someone you love, with the ArthroLive
+        tea and balm wellness combination.
+      </p>
+      <a href="#packages" data-track-cta="final" class="btn-gold mt-5 w-full sm:w-auto">
+        Choose Your ArthroLive Package
+        <Icon name="arrow-right" size={19} />
+      </a>
+    </div>
+  </div>
+</section>

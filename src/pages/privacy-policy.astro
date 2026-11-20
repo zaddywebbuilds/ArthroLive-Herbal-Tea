@@ -1,0 +1,43 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { site } from '../config/site';
+const contactLine = site.contact.email || site.contact.phone || 'the contact details shown in the footer of our website';
+---
+
+<Legal
+  title="Privacy Policy | ArthroLive Ghana"
+  heading="Privacy Policy"
+  path="/privacy-policy"
+  description="How ArthroLive Ghana collects, uses and protects the personal information you give us when you place an order."
+>
+  <p>This policy explains what we do with the information you give us when you order ArthroLive Herbal Tea and Herbal Balm through this website.</p>
+
+  <h2>What we collect</h2>
+  <p>When you complete the order form we collect only what we need to deliver your order and speak to you about it:</p>
+  <ul>
+    <li>Your full name</li>
+    <li>Your phone number, and an alternative number if you give one</li>
+    <li>Your region, city or town, delivery address and nearest landmark</li>
+    <li>The package you selected and its total price</li>
+  </ul>
+  <p>We do <strong>not</strong> ask for, collect or store health records, symptom details, card numbers, bank details or any payment information on this website.</p>
+
+  <h2>How we use it</h2>
+  <p>We use your details to call you and confirm your order, to prepare and dispatch your package, to give the courier the address and landmark needed to reach you, and to answer you if you contact us about the order.</p>
+
+  <h2>Who we share it with</h2>
+  <p>We share your name, phone number and delivery address with the courier who delivers your package, because they cannot deliver without it. We do not sell your information, and we do not share it with anyone else unless the law requires it.</p>
+
+  <h2>Analytics and advertising</h2>
+  <p>This website may use analytics and advertising measurement tools such as Google Analytics and the Meta Pixel to understand how many people view the page and how they use it. These tools record anonymous usage events only. Your name, phone number, delivery address, region and anything about your health are <strong>never</strong> sent to them.</p>
+  <p>You can block these tools with your browser settings or a tracking blocker, and the website will still work normally.</p>
+
+  <h2>How long we keep it</h2>
+  <p>We keep order records for as long as we need them to serve you and to meet our own business and tax record keeping obligations, and then we remove them.</p>
+
+  <h2>Your choices</h2>
+  <p>You can ask us what information we hold about you, ask us to correct it, or ask us to delete it. Contact us using {contactLine} and we will deal with your request.</p>
+
+  <h2>Changes to this policy</h2>
+  <p>If we change how we handle your information, we will update this page.</p>
+</Legal>

@@ -1,0 +1,70 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../config/site';
+
+const pillars = [
+  site.delivery.freeNationwide && {
+    icon: 'truck',
+    title: 'Delivery across Ghana',
+    body: 'We deliver to all 16 regions. Delivery is free on every package on this page.',
+  },
+  site.delivery.payOnDelivery && {
+    icon: 'hand-coins',
+    title: 'Pay when it reaches you',
+    body: 'You pay the courier in cash when your package arrives. Nothing is taken upfront.',
+  },
+  {
+    icon: 'phone-call',
+    title: 'A real person confirms',
+    body: `Our team calls you to confirm your order, your address and the delivery before anything is sent.${site.contact.hours ? ' ' + site.contact.hours + '.' : ''}`,
+  },
+  {
+    icon: 'package-check',
+    title: 'Sealed, complete packs',
+    body: 'Every package contains the full 20 tea bags and a sealed 50g balm jar in original ArthroLive packaging.',
+  },
+].filter(Boolean) as { icon: string; title: string; body: string }[];
+
+const reviews = site.showTestimonials ? site.testimonials : [];
+---
+<section class="section-y bg-teal-soft/60">
+  <div class="wrap">
+    <div class="max-w-[54ch]">
+      <span class="eyebrow">Ordering With Confidence</span>
+      <h2 class="h-section mt-1.5 text-teal-dark">
+        {reviews.length ? 'What Customers Are Saying' : 'What You Can Count On'}
+      </h2>
+      {!reviews.length && (
+        <p class="mt-2 text-ink-muted">
+          We only publish customer reviews once they have actually been given to us, so
+          here is what we can tell you for certain today.
+        </p>
+      )}
+    </div>
+
+    {reviews.length > 0 && (
+      <ul class="mt-4 grid gap-3.5 md:grid-cols-3">
+        {reviews.map((r) => (
+          <li class="card p-4">
+            <Icon name="quote" size={20} class="text-gold" />
+            <p class="mt-2 text-[15px] leading-snug text-ink">{r.quote}</p>
+            <p class="mt-3 text-[13.5px] font-bold text-teal-dark">{r.name}</p>
+            <p class="text-[13px] text-ink-muted">{r.location}</p>
+          </li>
+        ))}
+      </ul>
+    )}
+
+    <ul class="mt-4 grid gap-2.5 sm:grid-cols-2 sm:gap-3.5 lg:grid-cols-4">
+      {pillars.map((p) => (
+        <li class="card p-4">
+          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-green-soft text-green">
+            <Icon name={p.icon} size={20} />
+          </span>
+          <h3 class="mt-2.5 text-[15.5px] font-extrabold text-teal-dark">{p.title}</h3>
+          <p class="mt-1 text-[14.5px] leading-snug text-ink-muted">{p.body}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

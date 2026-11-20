@@ -1,0 +1,68 @@
+---
+import Img from './Img.astro';
+import Icon from './Icon.astro';
+import { site, lowestPrice, formatPrice } from '../config/site';
+
+const trust = [
+  site.delivery.freeNationwide && { icon: 'truck', label: 'Free delivery', sub: 'Anywhere in Ghana' },
+  site.delivery.payOnDelivery && { icon: 'hand-coins', label: 'Pay on delivery', sub: 'Cash when it arrives' },
+  { icon: 'package-check', label: 'Tea + balm', sub: '20 bags & 50g jar' },
+].filter(Boolean) as { icon: string; label: string; sub: string }[];
+---
+<section id="top" class="relative overflow-hidden bg-cream">
+  <div
+    class="pointer-events-none absolute inset-x-0 top-0 h-[320px] bg-gradient-to-b from-teal-soft/70 to-transparent"
+    aria-hidden="true"
+  ></div>
+
+  <div class="wrap relative grid items-center gap-3.5 py-4 md:grid-cols-[1.05fr_1fr] md:gap-10 md:py-11">
+    <div class="order-2 md:order-1">
+      <span class="eyebrow">{site.tagline}</span>
+      <h1 class="mt-1.5 text-[clamp(1.625rem,1.05rem+2.9vw,3rem)] font-extrabold text-teal-dark">
+        When Every Step Hurts, Even the Simplest Things Become Difficult.
+      </h1>
+      <p class="mt-2.5 max-w-[48ch] text-[1rem] text-ink-muted md:mt-3 md:text-[1.125rem]">
+        Stiff knees in the morning. Aching joints after work. Burning feet at night.
+        Sometimes, even standing up after sitting feels like a battle.
+      </p>
+      <p class="mt-2.5 max-w-[48ch] text-[1rem] font-medium text-ink md:mt-3 md:text-[1.125rem]">
+        Meet ArthroLive, a herbal tea and massage balm combination made for your
+        everyday comfort and wellness routine.
+      </p>
+
+      <div class="mt-4 flex flex-wrap items-center gap-3 md:mt-5">
+        <a href="#packages" data-track-cta="hero" class="btn-primary w-full sm:w-auto">
+          Order ArthroLive Today
+          <Icon name="arrow-right" size={19} />
+        </a>
+        <span class="text-[15px] font-medium text-ink-muted">
+          From {formatPrice(lowestPrice)}
+          {site.delivery.payOnDelivery && <span class="text-green"> &middot; Payment on Delivery Available</span>}
+        </span>
+      </div>
+
+      <ul class="mt-6 grid grid-cols-3 gap-2 border-t border-line pt-4 sm:gap-3">
+        {trust.map((t) => (
+          <li class="flex items-start gap-2">
+            <Icon name={t.icon} size={19} class="mt-0.5 shrink-0 text-green" />
+            <span class="leading-tight">
+              <span class="block text-[13.5px] font-bold text-teal-dark">{t.label}</span>
+              <span class="block text-[12.5px] text-ink-muted">{t.sub}</span>
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="order-1 md:order-2">
+      <Img
+        name="arthrolive-herbal-tea-balm-ghana-hero"
+        alt="ArthroLive Herbal Tea pouch of 20 tea bags beside the 50g ArthroLive Herbal Balm jar"
+        ratio="16/10"
+        sizes="(min-width: 1024px) 560px, (min-width: 768px) 46vw, 100vw"
+        priority
+        class="!aspect-[16/9] rounded-card border border-line shadow-[var(--shadow-lift)] sm:!aspect-[16/10]"
+      />
+    </div>
+  </div>
+</section>

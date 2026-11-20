@@ -1,0 +1,86 @@
+---
+import { lowestPrice, formatPrice } from '../config/site';
+---
+
+<div
+  id="sticky-cta"
+  class="fixed inset-x-0 bottom-0 z-50 border-t border-teal-dark/30 bg-teal-dark/97 backdrop-blur-sm transition-transform duration-200 md:hidden"
+  data-hidden="false"
+>
+  <div class="flex items-center justify-between gap-3 px-4 py-2.5 pb-[max(10px,env(safe-area-inset-bottom))]">
+    <span class="leading-tight text-white">
+      <span class="block text-[11.5px] uppercase tracking-wide text-white/70">Tea + Balm</span>
+      <span class="block font-display text-[1.0625rem] font-extrabold">From {formatPrice(lowestPrice)}</span>
+    </span>
+    <a href="#packages" data-track-cta="sticky" class="btn-gold !min-h-[44px] !px-6 !text-[15.5px]">Order Now</a>
+  </div>
+</div>
+
+<style>
+  #sticky-cta[data-hidden='true'] {
+    transform: translateY(110%);
+    pointer-events: none;
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var bar = document.getElementById('sticky-cta');
+    var order = document.getElementById('order');
+    if (!bar || !order) return;
+
+    var orderVisible = false;
+    var keyboardOpen = false;
+
+    function apply() {
+      var done = document.documentElement.getAttribute('data-order-complete') === 'true';
+      bar.setAttribute('data-hidden', String(orderVisible || keyboardOpen || done));
+    }
+
+    // Hide once the order form is on screen.
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(
+        function (entries) {
+          orderVisible = entries[0].isIntersecting;
+          apply();
+        },
+        { rootMargin: '-10% 0px -25% 0px' }
+      ).observe(order);
+    }
+
+    // Hide while a field is focused (the mobile keyboard is up).
+    document.addEventListener('focusin', function (e) {
+      var t = e.target;
+      if (t && /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) { keyboardOpen = true; apply(); }
+    });
+    document.addEventListener('focusout', function () {
+      window.setTimeout(function () {
+        var a = document.activeElement;
+        keyboardOpen = !!(a && /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName));
+        apply();
+      }, 60);
+    });
+
+    // visualViewport shrinks when the on-screen keyboard appears.
+    if (window.visualViewport) {
+      var base = window.visualViewport.height;
+      window.visualViewport.addEventListener('resize', function () {
+        keyboardOpen = window.visualViewport.height < base * 0.78;
+        apply();
+      });
+    }
+
+    // Hide for good once the confirmation appears.
+    new MutationObserver(apply).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-order-complete'],
+    });
+
+    // Report CTA clicks to analytics.
+    Array.prototype.forEach.call(document.querySelectorAll('[data-track-cta]'), function (el) {
+      el.addEventListener('click', function () {
+        if (window.alTrack) window.alTrack('CtaClicked', { location: el.getAttribute('data-track-cta') });
+      });
+    });
+  })();
+</script>

@@ -1,0 +1,34 @@
+---
+import Icon from './Icon.astro';
+
+const features = [
+  { icon: 'layers', title: 'Two complementary products', body: 'A tea to drink and a balm to massage, working as one routine rather than two separate purchases.' },
+  { icon: 'calendar-check', title: 'A convenient daily routine', body: 'Simple enough to keep up with on a working day, a market day or a quiet day at home.' },
+  { icon: 'hand', title: 'Targeted topical massage', body: 'The balm goes exactly where you want it: knees, shoulders, lower back, hands or feet.' },
+  { icon: 'cup-soda', title: 'A familiar tea format', body: '20 sealed tea bags. If you can make a cup of tea, you can use it. No measuring, no mixing.' },
+  { icon: 'house', title: 'Easy to use at home', body: 'No appointments and no equipment. Everything you need is in the pack.' },
+  { icon: 'heart-handshake', title: 'Built around comfort', body: 'Made for people who simply want to move through their day more comfortably.' },
+] as const;
+---
+<section id="benefits" class="section-y bg-white">
+  <div class="wrap">
+    <div class="max-w-[54ch]">
+      <span class="eyebrow">Why Choose ArthroLive</span>
+      <h2 class="h-section mt-1.5 text-teal-dark">Simple, Convenient Care for Everyday Comfort</h2>
+    </div>
+
+    <ul class="mt-4 grid gap-2.5 sm:grid-cols-2 sm:gap-3.5 lg:grid-cols-3 lg:gap-4">
+      {features.map((f) => (
+        <li class="card flex gap-3 p-3.5 sm:p-4">
+          <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-teal-soft text-teal">
+            <Icon name={f.icon} size={20} />
+          </span>
+          <div>
+            <h3 class="text-[15.5px] font-extrabold text-teal-dark">{f.title}</h3>
+            <p class="mt-1 text-[14.5px] leading-snug text-ink-muted">{f.body}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

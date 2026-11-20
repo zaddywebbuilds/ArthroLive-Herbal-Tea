@@ -1,0 +1,54 @@
+---
+import Img from './Img.astro';
+import ProductCard from './ProductCard.astro';
+import { site } from '../config/site';
+---
+<section id="products" class="section-y bg-cream">
+  <div class="wrap">
+    <div class="grid gap-5 md:grid-cols-[1fr_1.05fr] md:items-center md:gap-9">
+      <Img
+        name="arthrolive-tea-and-balm-pack-angled"
+        alt="ArthroLive Herbal Tea pouch and ArthroLive Herbal Balm jar photographed together at a three-quarter angle"
+        ratio="1/1"
+        sizes="(min-width: 768px) 420px, 100vw"
+        class="rounded-card border border-line bg-white"
+      />
+      <div>
+        <span class="eyebrow">The ArthroLive Routine</span>
+        <h2 class="h-section mt-1.5 text-teal-dark">Two Products. One Simple Wellness Routine.</h2>
+        <p class="mt-3 max-w-[50ch] text-ink-muted">
+          ArthroLive brings together a herbal tea and a topical massage balm in one
+          convenient package. One you drink as part of your day. One you massage into the
+          areas that feel tight or sore.
+        </p>
+        <p class="mt-2.5 max-w-[50ch] text-ink-muted">
+          Nothing complicated to remember, and nothing that takes over your evening. It is
+          made to sit alongside the life you already live.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-5 grid gap-3.5 md:mt-7 md:grid-cols-2 md:gap-5">
+      <ProductCard
+        step="Drink"
+        name={site.products.tea.name}
+        size={site.products.tea.size}
+        type={site.products.tea.type}
+        description={site.products.tea.description}
+        points={site.products.tea.points}
+        image="arthrolive-herbal-tea-20-tea-bags"
+        alt="ArthroLive Herbal Tea pouch of 20 tea bags beside a freshly brewed cup of amber herbal tea"
+      />
+      <ProductCard
+        step="Massage"
+        name={site.products.balm.name}
+        size={site.products.balm.size}
+        type={site.products.balm.type}
+        description={site.products.balm.description}
+        points={site.products.balm.points}
+        image="arthrolive-herbal-balm-50g-open-jar"
+        alt="Open 50g jar of ArthroLive Herbal Balm showing its smooth golden balm"
+      />
+    </div>
+  </div>
+</section>

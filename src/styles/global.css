@@ -1,0 +1,169 @@
+@import 'tailwindcss';
+
+@import '@fontsource/manrope/latin-500.css';
+@import '@fontsource/manrope/latin-700.css';
+@import '@fontsource/manrope/latin-800.css';
+@import '@fontsource/dm-sans/latin-400.css';
+@import '@fontsource/dm-sans/latin-500.css';
+@import '@fontsource/dm-sans/latin-700.css';
+
+@theme {
+  --color-teal: #00565c;
+  --color-teal-dark: #003c40;
+  --color-teal-soft: #e6f0f0;
+  --color-gold: #d4a017;
+  --color-gold-soft: #f7ecd2;
+  --color-green: #247541;
+  --color-green-soft: #e8f2eb;
+  --color-cream: #fff9ed;
+  --color-ink: #202623;
+  --color-ink-muted: #51605a;
+  --color-line: #e6ded0;
+
+  --font-display: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 16px;
+
+  --shadow-soft: 0 1px 2px rgb(32 38 35 / 0.04), 0 6px 18px -6px rgb(32 38 35 / 0.1);
+  --shadow-lift: 0 2px 4px rgb(32 38 35 / 0.05), 0 14px 34px -12px rgb(0 60 64 / 0.22);
+}
+
+:root {
+  color-scheme: light;
+  scroll-behavior: smooth;
+  /* sticky header + mobile order bar offset for anchor jumps */
+  scroll-padding-top: 74px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: #ffffff;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+p { text-wrap: pretty; }
+
+img { max-width: 100%; height: auto; }
+
+/* Focus visibility for keyboard and screen-reader users */
+:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@utility wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+
+@utility section-y {
+  padding-block: 24px;
+  @media (width >= 768px) { padding-block: 44px; }
+}
+
+/* Primary call to action */
+@utility btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;
+  padding-inline: 26px;
+  border-radius: 999px;
+  background: var(--color-green);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.0625rem;
+  letter-spacing: -0.01em;
+  box-shadow: var(--shadow-lift);
+  transition: background-color 0.18s ease, transform 0.18s ease;
+}
+@utility btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;
+  padding-inline: 26px;
+  border-radius: 999px;
+  background: var(--color-gold);
+  color: #2a2003;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.0625rem;
+  box-shadow: var(--shadow-lift);
+  transition: background-color 0.18s ease, transform 0.18s ease;
+}
+@utility btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding-inline: 22px;
+  border-radius: 999px;
+  border: 1.5px solid var(--color-teal);
+  color: var(--color-teal);
+  font-family: var(--font-display);
+  font-weight: 700;
+  background: #fff;
+  transition: background-color 0.18s ease;
+}
+
+.btn-primary:hover { background: #1e6338; }
+.btn-gold:hover { background: #c29314; }
+.btn-outline:hover { background: var(--color-teal-soft); }
+.btn-primary:active, .btn-gold:active { transform: translateY(1px); }
+
+@utility card {
+  background: #fff;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+@utility eyebrow {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-green);
+}
+
+/* Section heading scale */
+@utility h-section {
+  font-size: clamp(1.5rem, 1.15rem + 1.7vw, 2.25rem);
+  font-weight: 800;
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}

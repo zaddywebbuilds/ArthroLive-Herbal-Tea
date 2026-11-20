@@ -1,0 +1,396 @@
+---
+import Icon from './Icon.astro';
+import { site, GHANA_REGIONS, formatPrice } from '../config/site';
+
+const cfg = {
+  endpoint: site.order.endpoint,
+  minFillSeconds: site.order.minFillSeconds,
+  freeDelivery: site.delivery.freeNationwide,
+  feeAccra: site.delivery.feeAccra,
+  feeOther: site.delivery.feeOtherRegions,
+  symbol: site.currencySymbol,
+  currency: site.currency,
+  packages: site.packages.map((p) => ({
+    id: p.id, name: p.name, price: p.price, teaQty: p.teaQty, balmQty: p.balmQty,
+  })),
+};
+
+const field = 'w-full rounded-[10px] border border-line bg-white px-3.5 py-3 text-[16px] text-ink outline-none transition focus:border-teal focus:ring-2 focus:ring-teal/20 aria-[invalid=true]:border-red-500 aria-[invalid=true]:ring-2 aria-[invalid=true]:ring-red-500/15';
+const label = 'mb-1 block text-[14.5px] font-bold text-teal-dark';
+const errCls = 'mt-1 hidden text-[13px] font-medium text-red-600';
+---
+
+<section id="order" class="section-y bg-white scroll-mt-[66px]">
+  <div class="wrap">
+    <div class="mx-auto max-w-[760px]">
+      <div class="text-center">
+        <span class="eyebrow">Order</span>
+        <h2 class="h-section mt-1.5 text-teal-dark">Place Your ArthroLive Order</h2>
+        <p class="mx-auto mt-2 max-w-[48ch] text-ink-muted">
+          Complete the form below and our team will contact you to confirm your order and
+          delivery details.
+        </p>
+      </div>
+
+      <form id="order-form" novalidate class="mt-5 rounded-card border border-line bg-cream p-4 shadow-[var(--shadow-soft)] sm:p-6">
+        <div class="absolute h-0 w-0 overflow-hidden" aria-hidden="true">
+          <label for="company-website">Do not fill this in</label>
+          <input type="text" id="company-website" name="company_website" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <fieldset class="border-0 p-0">
+          <legend class="mb-2 font-display text-[15px] font-extrabold text-teal-dark">1. Choose your package</legend>
+          <div class="grid gap-2 sm:grid-cols-3">
+            {site.packages.map((p, i) => (
+              <label class="relative flex cursor-pointer flex-col rounded-[12px] border border-line bg-white p-3 transition has-[:checked]:border-teal has-[:checked]:bg-teal-soft/60 has-[:checked]:ring-2 has-[:checked]:ring-teal/25">
+                <input type="radio" name="package" value={p.id} class="sr-only" checked={i === 1} />
+                <span class="text-[14.5px] font-extrabold text-teal-dark">{p.name}</span>
+                <span class="text-[13px] text-ink-muted">{p.teaQty} tea + {p.balmQty} balm</span>
+                <span class="mt-1 font-display text-[17px] font-extrabold text-green">{formatPrice(p.price)}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
+        <fieldset class="mt-5 border-0 p-0">
+          <legend class="mb-2 font-display text-[15px] font-extrabold text-teal-dark">2. Your details</legend>
+          <div class="grid gap-3 sm:grid-cols-2">
+            <div class="sm:col-span-2">
+              <label class={label} for="fullName">Full name <span class="text-red-600">*</span></label>
+              <input class={field} type="text" id="fullName" name="fullName" autocomplete="name" required placeholder="e.g. Ama Mensah" />
+              <p class={errCls} data-error-for="fullName"></p>
+            </div>
+            <div>
+              <label class={label} for="phone">Phone number <span class="text-red-600">*</span></label>
+              <input class={field} type="tel" id="phone" name="phone" inputmode="tel" autocomplete="tel" required placeholder="024 123 4567" />
+              <p class={errCls} data-error-for="phone"></p>
+            </div>
+            <div>
+              <label class={label} for="altPhone">Alternative phone <span class="font-medium text-ink-muted">(optional)</span></label>
+              <input class={field} type="tel" id="altPhone" name="altPhone" inputmode="tel" placeholder="055 987 6543" />
+              <p class={errCls} data-error-for="altPhone"></p>
+            </div>
+            <div>
+              <label class={label} for="region">Region <span class="text-red-600">*</span></label>
+              <select class={field} id="region" name="region" required>
+                <option value="">Select your region</option>
+                {GHANA_REGIONS.map((r) => <option value={r}>{r}</option>)}
+              </select>
+              <p class={errCls} data-error-for="region"></p>
+            </div>
+            <div>
+              <label class={label} for="city">City or town <span class="text-red-600">*</span></label>
+              <input class={field} type="text" id="city" name="city" autocomplete="address-level2" required placeholder="e.g. Kasoa" />
+              <p class={errCls} data-error-for="city"></p>
+            </div>
+            <div class="sm:col-span-2">
+              <label class={label} for="address">Delivery address <span class="text-red-600">*</span></label>
+              <textarea class={field} id="address" name="address" rows="2" autocomplete="street-address" required placeholder="House number, street or area"></textarea>
+              <p class={errCls} data-error-for="address"></p>
+            </div>
+            <div class="sm:col-span-2">
+              <label class={label} for="landmark">Nearest landmark <span class="text-red-600">*</span></label>
+              <input class={field} type="text" id="landmark" name="landmark" required placeholder="e.g. Opposite the Shell filling station" />
+              <p class={errCls} data-error-for="landmark"></p>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="mt-5 rounded-[12px] border border-teal/20 bg-white p-4">
+          <h3 class="font-display text-[15px] font-extrabold text-teal-dark">Order summary</h3>
+          <dl class="mt-2.5 space-y-1.5 text-[15px]">
+            <div class="flex justify-between gap-3">
+              <dt class="text-ink-muted">Package</dt>
+              <dd class="text-right font-semibold" data-summary="package">&mdash;</dd>
+            </div>
+            <div class="flex justify-between gap-3">
+              <dt class="text-ink-muted">Quantity</dt>
+              <dd class="text-right font-semibold" data-summary="quantity">&mdash;</dd>
+            </div>
+            <div class="flex justify-between gap-3">
+              <dt class="text-ink-muted">Delivery</dt>
+              <dd class="text-right font-semibold" data-summary="delivery">&mdash;</dd>
+            </div>
+            <div class="flex justify-between gap-3">
+              <dt class="text-ink-muted">Payment method</dt>
+              <dd class="text-right font-semibold">{site.delivery.payOnDelivery ? 'Pay on delivery' : 'Confirmed by our team'}</dd>
+            </div>
+            <div class="mt-1 flex justify-between gap-3 border-t border-line pt-2.5">
+              <dt class="font-display font-extrabold text-teal-dark">Total</dt>
+              <dd class="text-right font-display text-[1.375rem] font-extrabold text-green" data-summary="total">&mdash;</dd>
+            </div>
+          </dl>
+        </div>
+
+        <button type="submit" id="order-submit" class="btn-primary mt-4 w-full">
+          <span data-submit-idle class="inline-flex items-center gap-2">
+            Confirm My Order
+            <Icon name="check" size={19} stroke={2.6} />
+          </span>
+          <span data-submit-busy hidden class="inline-flex items-center gap-2">
+            <svg class="h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="3" opacity=".3"></circle>
+              <path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
+            </svg>
+            Sending your order...
+          </span>
+        </button>
+
+        <p class="mt-2.5 text-center text-[13px] text-ink-muted">
+          We only use your details to deliver your order. We never ask for health records,
+          card details or any payment online.
+        </p>
+
+        <p id="order-error" role="alert" hidden class="mt-3 rounded-[10px] border border-red-300 bg-red-50 px-3.5 py-3 text-[14.5px] leading-snug text-red-800"></p>
+      </form>
+
+      <div id="order-success" role="status" hidden class="mt-5 rounded-card border-2 border-green bg-green-soft p-5 text-center sm:p-7">
+        <span class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-green text-white">
+          <Icon name="check" size={30} stroke={3} />
+        </span>
+        <h3 class="mt-3 font-display text-2xl font-extrabold text-teal-dark">Order received</h3>
+        <p class="mx-auto mt-2 max-w-[42ch] text-ink">
+          Thank you. Your order has been sent to our team and we will call you on the
+          number you gave us to confirm your details and delivery.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline define:vars={{ cfg }}>
+  (function () {
+    var form = document.getElementById('order-form');
+    if (!form) return;
+
+    var errorBox = document.getElementById('order-error');
+    var successBox = document.getElementById('order-success');
+    var submitBtn = document.getElementById('order-submit');
+    var idle = submitBtn.querySelector('[data-submit-idle]');
+    var busy = submitBtn.querySelector('[data-submit-busy]');
+    var loadedAt = Date.now();
+    var sending = false;
+    var submitted = false;
+
+    function byId(id) {
+      for (var i = 0; i < cfg.packages.length; i++) if (cfg.packages[i].id === id) return cfg.packages[i];
+      return null;
+    }
+    function money(n) { return cfg.symbol + n.toLocaleString('en-GH'); }
+    function selected() { return form.querySelector('input[name="package"]:checked'); }
+
+    function deliveryFee() {
+      if (cfg.freeDelivery) return 0;
+      return form.region.value === 'Greater Accra' ? cfg.feeAccra : cfg.feeOther;
+    }
+
+    function set(key, value) {
+      var el = form.querySelector('[data-summary="' + key + '"]');
+      if (el) el.textContent = value;
+    }
+
+    function refreshSummary() {
+      var radio = selected();
+      var pkg = radio ? byId(radio.value) : null;
+      if (!pkg) {
+        ['package', 'quantity', 'delivery', 'total'].forEach(function (k) { set(k, '—'); });
+        return;
+      }
+      var fee = deliveryFee();
+      set('package', pkg.name);
+      set('quantity', pkg.teaQty + ' herbal tea' + (pkg.teaQty > 1 ? 's' : '') + ' + ' + pkg.balmQty + ' herbal balm' + (pkg.balmQty > 1 ? 's' : ''));
+      set('delivery', fee === 0 ? 'Free' : money(fee));
+      set('total', money(pkg.price + fee));
+    }
+
+    // Ghana mobile numbers: 0XXXXXXXXX, 233XXXXXXXXX or +233XXXXXXXXX,
+    // where the first digit after the leading zero is 2, 3, 5 or 6.
+    function normalisePhone(raw) {
+      var digits = String(raw || '').replace(/[\s()\-\.]/g, '');
+      var m = digits.match(/^(?:\+?233|0)([2356][0-9]{8})$/);
+      return m ? '+233' + m[1] : null;
+    }
+
+    var RULES = {
+      fullName: function (v) {
+        if (!v.trim()) return 'Please enter your full name.';
+        if (v.trim().length < 3) return 'Please enter your full name.';
+        if (!/[a-zA-Z]{2}/.test(v)) return 'Please enter your name in letters.';
+        return '';
+      },
+      phone: function (v) {
+        if (!v.trim()) return 'Please enter your phone number.';
+        return normalisePhone(v) ? '' : 'Enter a valid Ghana number, e.g. 024 123 4567.';
+      },
+      altPhone: function (v) {
+        return (!v.trim() || normalisePhone(v)) ? '' : 'Enter a valid Ghana number or leave this empty.';
+      },
+      region: function (v) { return v ? '' : 'Please select your region.'; },
+      city: function (v) { return v.trim().length >= 2 ? '' : 'Please enter your city or town.'; },
+      address: function (v) { return v.trim().length >= 6 ? '' : 'Please give the address we should deliver to.'; },
+      landmark: function (v) { return v.trim().length >= 3 ? '' : 'A nearby landmark helps the courier find you.'; }
+    };
+
+    function showFieldError(name, message) {
+      var input = form.elements[name];
+      var note = form.querySelector('[data-error-for="' + name + '"]');
+      if (!input || !note) return;
+      if (message) {
+        input.setAttribute('aria-invalid', 'true');
+        note.id = 'err-' + name;
+        input.setAttribute('aria-describedby', note.id);
+        note.textContent = message;
+        note.classList.remove('hidden');
+      } else {
+        input.removeAttribute('aria-invalid');
+        input.removeAttribute('aria-describedby');
+        note.textContent = '';
+        note.classList.add('hidden');
+      }
+    }
+
+    function validateAll() {
+      var firstBad = null;
+      Object.keys(RULES).forEach(function (name) {
+        var input = form.elements[name];
+        var msg = RULES[name](input ? input.value : '');
+        showFieldError(name, msg);
+        if (msg && !firstBad) firstBad = input;
+      });
+      return firstBad;
+    }
+
+    Object.keys(RULES).forEach(function (name) {
+      var input = form.elements[name];
+      if (!input) return;
+      input.addEventListener('blur', function () { showFieldError(name, RULES[name](input.value)); });
+      input.addEventListener('input', function () {
+        if (input.getAttribute('aria-invalid') === 'true') showFieldError(name, RULES[name](input.value));
+      });
+    });
+
+    form.addEventListener('change', function (e) {
+      if (e.target.name === 'package' || e.target.name === 'region') refreshSummary();
+      if (e.target.name === 'package') {
+        var pkg = byId(e.target.value);
+        if (pkg && window.alTrack) {
+          window.alTrack('PackageSelected', { content_name: pkg.name, value: pkg.price, currency: cfg.currency });
+        }
+      }
+    });
+
+    // Pricing card buttons preselect the matching package, then scroll here.
+    Array.prototype.forEach.call(document.querySelectorAll('[data-select-package]'), function (btn) {
+      btn.addEventListener('click', function () {
+        var id = btn.getAttribute('data-select-package');
+        var radio = form.querySelector('input[name="package"][value="' + id + '"]');
+        if (radio) { radio.checked = true; refreshSummary(); }
+        var pkg = byId(id);
+        if (pkg && window.alTrack) {
+          window.alTrack('InitiateCheckout', {
+            content_name: pkg.name, value: pkg.price, currency: cfg.currency,
+            num_items: pkg.teaQty + pkg.balmQty
+          });
+        }
+        document.getElementById('order').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        window.setTimeout(function () {
+          var n = form.elements.fullName;
+          if (n && !n.value) n.focus({ preventScroll: true });
+        }, 550);
+      });
+    });
+
+    // ?package=double preselects a package on arrival.
+    var fromUrl = new URLSearchParams(window.location.search).get('package');
+    if (fromUrl) {
+      var preset = form.querySelector('input[name="package"][value="' + fromUrl + '"]');
+      if (preset) preset.checked = true;
+    }
+    refreshSummary();
+
+    function setBusy(on) {
+      sending = on;
+      submitBtn.disabled = on;
+      submitBtn.style.opacity = on ? '0.75' : '';
+      idle.hidden = on;
+      busy.hidden = !on;
+    }
+
+    function fail(message) {
+      errorBox.textContent = message;
+      errorBox.hidden = false;
+      errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (sending || submitted) return;
+      errorBox.hidden = true;
+
+      if (form.elements.company_website.value) return;
+      if ((Date.now() - loadedAt) / 1000 < cfg.minFillSeconds) {
+        fail('Please take a moment to check your details, then submit again.');
+        return;
+      }
+
+      var firstBad = validateAll();
+      if (firstBad) {
+        firstBad.focus();
+        firstBad.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        fail('Please correct the highlighted fields and submit again.');
+        return;
+      }
+
+      var radio = selected();
+      var pkg = radio ? byId(radio.value) : null;
+      if (!pkg) { fail('Please choose a package above.'); return; }
+
+      if (!cfg.endpoint) {
+        // No backend configured: never pretend the order went through.
+        fail('Online ordering is not connected yet, so this order was NOT sent. Please contact us directly to place your order. (Site owner: set order.endpoint in src/config/site.ts.)');
+        return;
+      }
+
+      setBusy(true);
+      var fee = deliveryFee();
+      var payload = {
+        package: { id: pkg.id, name: pkg.name, teaQty: pkg.teaQty, balmQty: pkg.balmQty, price: pkg.price },
+        delivery: { fee: fee, method: 'Pay on delivery' },
+        total: pkg.price + fee,
+        currency: cfg.currency,
+        customer: {
+          fullName: form.fullName.value.trim(),
+          phone: normalisePhone(form.phone.value),
+          altPhone: form.altPhone.value.trim() ? normalisePhone(form.altPhone.value) : '',
+          region: form.region.value,
+          city: form.city.value.trim(),
+          address: form.address.value.trim(),
+          landmark: form.landmark.value.trim()
+        },
+        meta: { submittedAt: new Date().toISOString(), page: window.location.href }
+      };
+
+      fetch(cfg.endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(function (res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        submitted = true;
+        form.hidden = true;
+        successBox.hidden = false;
+        successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        document.documentElement.setAttribute('data-order-complete', 'true');
+        // Lead only. No name, phone, address or region is sent to analytics.
+        if (window.alTrack) {
+          window.alTrack('Lead', { content_name: pkg.name, value: pkg.price + fee, currency: cfg.currency });
+          window.alTrack('OrderSubmitted', { content_name: pkg.name, value: pkg.price + fee, currency: cfg.currency });
+        }
+      }).catch(function () {
+        fail('We could not send your order just now. Please check your connection and try again, or contact us directly.');
+      }).then(function () {
+        setBusy(false);
+      });
+    });
+  })();
+</script>

@@ -1,0 +1,49 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { site } from '../config/site';
+---
+
+<Legal
+  title="Delivery & Returns | ArthroLive Ghana"
+  heading="Delivery & Returns Policy"
+  path="/delivery-and-returns"
+  description="How ArthroLive delivers across Ghana, what delivery costs, and what to do if something is wrong with your package."
+>
+  <h2>Where we deliver</h2>
+  <p>We deliver to all 16 regions of Ghana: Ahafo, Ashanti, Bono, Bono East, Central, Eastern, Greater Accra, North East, Northern, Oti, Savannah, Upper East, Upper West, Volta, Western and Western North.</p>
+
+  <h2>Delivery charges</h2>
+  {site.delivery.freeNationwide ? (
+    <p>Delivery is <strong>free</strong> on every package shown on this website, anywhere in Ghana. The price on the package card is the full amount you pay.</p>
+  ) : (
+    <p>Your delivery charge depends on your region and is shown in the order summary once you select it. The total shown there is the amount you pay.</p>
+  )}
+
+  <h2>How long it takes</h2>
+  {site.delivery.timeline ? (
+    <p>{site.delivery.timeline}</p>
+  ) : (
+    <p>Delivery timing depends on your location and the courier serving it. Our team confirms the expected delivery schedule for your area when we call you about your order, so you know when to expect the courier.</p>
+  )}
+
+  <h2>Confirming your order</h2>
+  <p>We call every customer before dispatch to confirm the package, the delivery address and the landmark. Please make sure the phone number you give us will be answered. Adding an alternative number helps the courier reach you on the day.</p>
+
+  <h2>Payment on delivery</h2>
+  {site.delivery.payOnDelivery ? (
+    <p>You pay the courier when your package reaches you. Nothing is collected on this website. We will never ask you for card details, a PIN, a one-time password or a mobile money PIN.</p>
+  ) : (
+    <p>Our team will confirm the payment options with you when we call about your order.</p>
+  )}
+
+  <h2>Check your package on arrival</h2>
+  <p>Please open and check your package while the courier is still with you. Confirm that it contains the number of tea pouches and balm jars you ordered, that the seals are intact, and that nothing is damaged.</p>
+
+  <h2>If something is wrong</h2>
+  <p>If your package arrives damaged, incomplete, or is not what you ordered, contact us on the same day using the details in the footer. We will arrange a replacement or a refund of what you paid for the affected items.</p>
+  <p>Because these are consumable wellness products, we cannot accept the return of a pouch or jar that has been opened or used, unless it arrived faulty or damaged. Unopened, sealed products in their original packaging can be returned by arrangement with our team.</p>
+  <p>This policy does not affect any rights you have under Ghanaian consumer law.</p>
+
+  <h2>Contact</h2>
+  <p>For anything to do with a delivery or a return, reach us using the contact details in the footer of this website.</p>
+</Legal>

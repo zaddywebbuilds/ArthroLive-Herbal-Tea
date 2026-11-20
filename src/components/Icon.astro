@@ -1,0 +1,27 @@
+---
+/** Inline Lucide icon, read from lucide-static at build time (no runtime JS). */
+import fs from 'node:fs';
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+
+interface Props { name: string; class?: string; size?: number; stroke?: number }
+const { name, class: className = '', size = 22, stroke = 1.75 } = Astro.props;
+
+const file = require.resolve(`lucide-static/icons/${name}.svg`);
+const raw = fs.readFileSync(file, 'utf8');
+const inner = raw.replace(/^[\s\S]*?<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '').trim();
+---
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  width={size}
+  height={size}
+  fill="none"
+  stroke="currentColor"
+  stroke-width={stroke}
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class={className}
+  aria-hidden="true"
+  set:html={inner}
+/>

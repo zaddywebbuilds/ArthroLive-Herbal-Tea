@@ -1,0 +1,136 @@
+---
+import Base from '../layouts/Base.astro';
+import AnnouncementBar from '../components/AnnouncementBar.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Symptoms from '../components/Symptoms.astro';
+import Agitation from '../components/Agitation.astro';
+import Products from '../components/Products.astro';
+import Benefits from '../components/Benefits.astro';
+import HowToUse from '../components/HowToUse.astro';
+import LifestyleGallery from '../components/LifestyleGallery.astro';
+import Trust from '../components/Trust.astro';
+import Pricing from '../components/Pricing.astro';
+import OrderForm from '../components/OrderForm.astro';
+import Faq, { faqs } from '../components/Faq.astro';
+import FinalCta from '../components/FinalCta.astro';
+import Footer from '../components/Footer.astro';
+import StickyCta from '../components/StickyCta.astro';
+import { site } from '../config/site';
+
+const img = (p: string) => new URL(p, site.url).href;
+
+const organization = {
+  '@type': 'Organization',
+  '@id': `${site.url}/#organization`,
+  name: site.contact.company,
+  url: site.url,
+  logo: img('/favicon.svg'),
+  areaServed: { '@type': 'Country', name: 'Ghana' },
+  ...(site.contact.phone || site.contact.email
+    ? {
+        contactPoint: [
+          {
+            '@type': 'ContactPoint',
+            contactType: 'customer service',
+            areaServed: 'GH',
+            availableLanguage: 'English',
+            ...(site.contact.phone ? { telephone: site.contact.phone } : {}),
+            ...(site.contact.email ? { email: site.contact.email } : {}),
+          },
+        ],
+      }
+    : {}),
+};
+
+const product = {
+  '@type': 'Product',
+  '@id': `${site.url}/#product`,
+  name: 'ArthroLive Herbal Tea & Herbal Balm',
+  brand: { '@type': 'Brand', name: 'ArthroLive' },
+  category: 'Health & Wellness',
+  description:
+    'A two product wellness routine for everyday body comfort: ArthroLive Herbal Tea (20 tea bags) to drink and ArthroLive Herbal Balm (50g) for soothing topical massage.',
+  image: [
+    img('/images/arthrolive-herbal-tea-balm-ghana-hero-1400.webp'),
+    img('/images/arthrolive-tea-and-balm-pack-angled-1254.webp'),
+    img('/images/arthrolive-herbal-balm-50g-open-jar-1254.webp'),
+  ],
+  isRelatedTo: [
+    { '@type': 'Product', name: 'ArthroLive Herbal Tea', description: '20 herbal tea bags' },
+    { '@type': 'Product', name: 'ArthroLive Herbal Balm', description: '50g topical massage balm' },
+  ],
+  offers: {
+    '@type': 'AggregateOffer',
+    priceCurrency: site.currency,
+    lowPrice: Math.min(...site.packages.map((p) => p.price)),
+    highPrice: Math.max(...site.packages.map((p) => p.price)),
+    offerCount: site.packages.length,
+    availability: 'https://schema.org/InStock',
+    areaServed: { '@type': 'Country', name: 'Ghana' },
+    offers: site.packages.map((p) => ({
+      '@type': 'Offer',
+      name: `${p.name} - ${p.teaQty} herbal tea + ${p.balmQty} herbal balm`,
+      sku: `arthrolive-${p.id}`,
+      price: p.price,
+      priceCurrency: site.currency,
+      availability: 'https://schema.org/InStock',
+      url: `${site.url}/?package=${p.id}`,
+      ...(site.delivery.freeNationwide
+        ? {
+            shippingDetails: {
+              '@type': 'OfferShippingDetails',
+              shippingRate: { '@type': 'MonetaryAmount', value: 0, currency: site.currency },
+              shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'GH' },
+            },
+          }
+        : {}),
+    })),
+  },
+};
+
+const faqPage = {
+  '@type': 'FAQPage',
+  '@id': `${site.url}/#faq`,
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const website = {
+  '@type': 'WebSite',
+  '@id': `${site.url}/#website`,
+  url: site.url,
+  name: 'ArthroLive Ghana',
+  inLanguage: 'en-GH',
+  publisher: { '@id': `${site.url}/#organization` },
+};
+
+const schema = { '@context': 'https://schema.org', '@graph': [organization, website, product, faqPage] };
+---
+
+<Base preloadHero>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(schema)} />
+
+  <AnnouncementBar />
+  <Header />
+  <main id="main">
+    <Hero />
+    <Symptoms />
+    <Agitation />
+    <Products />
+    <Benefits />
+    <HowToUse />
+    <LifestyleGallery />
+    <Trust />
+    <Pricing />
+    <OrderForm />
+    <Faq />
+    <FinalCta />
+  </main>
+  <Footer />
+  <StickyCta />
+  <div class="h-[64px] md:hidden" aria-hidden="true"></div>
+</Base>
