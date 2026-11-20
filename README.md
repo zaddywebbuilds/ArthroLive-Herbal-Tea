@@ -10,19 +10,31 @@ third-party JavaScript unless a tracking ID is configured.
 
 ## Before this goes live
 
-Everything below lives in **`src/config/site.ts`** and is marked `>>> CONFIRM <<<`.
-The site deliberately does not invent any of it.
+`npm run build` ends with a readiness check that lists everything still
+outstanding. All of it lives in **`src/config/site.ts`**.
 
-| What | Where | Status |
+Sections with no data **do not render at all**, so an unfinished site never shows
+placeholder or invented content. Fill the config and the section appears.
+
+| What | Where | Why it matters |
 |---|---|---|
-| Contact phone / WhatsApp / email | `site.contact` | **empty** — the footer hides the block until these are filled in |
-| Order endpoint | `site.order.endpoint` | **empty** — see [backend/SETUP.md](backend/SETUP.md); until it is set the form refuses to submit and says so rather than faking success |
-| Prices (GH₵270 / 470 / 670) | `site.packages` | from the brief, **needs your confirmation** |
-| Free delivery nationwide | `site.delivery.freeNationwide` | currently `true`, **confirm you can honour this** |
-| Delivery timeline | `site.delivery.timeline` | empty, so the page says the team confirms the schedule |
-| Canonical domain | `site.url` + `public/robots.txt` | currently `arthrolive.com.gh` |
-| Tracking IDs | `site.tracking` | empty — nothing loads until set |
-| Customer reviews | `site.showTestimonials` + `site.testimonials` | `false` — the testimonial block is hidden and a verified-facts trust block shows instead |
+| **Ingredients** | `site.ingredients` | The biggest credibility gap for a herbal product. Transcribe from the physical pack or the supplier spec sheet. Do not write them from memory, and do not give an ingredient a claimed effect unless the pack states one. |
+| **Real product media** | `site.proof.media` | Studio renders show what a pack looks like; they do not prove it exists. Phone footage is fine: an unboxing, the tea bags close up, the balm being opened. |
+| **Customer reviews** | `site.testimonials` | Each needs `consent: true` or it will not render. Never invent a name, town, rating or recovery story. |
+| **Contact details** | `site.contact` | Currently empty, so the footer shows a placeholder line. Never send paid traffic in that state. |
+| **Order endpoint** | `site.order.endpoint` | See [backend/SETUP.md](backend/SETUP.md). Until it is set the form refuses to submit and says so. |
+| **How long a pack lasts** | `site.supply` | Set `teaBagsPerDay` from the label only. Pricing cards then show "About N days of tea". |
+| Prices (GH₵270 / 470 / 670) | `site.packages` | From the brief, needs confirmation. |
+| Free nationwide delivery | `site.delivery.freeNationwide` | Currently `true`. Confirm you can honour it. |
+| Canonical domain | `site.url` | A branded domain reads as more established than a github.io address. |
+| Tracking IDs | `site.tracking` | Nothing loads until set. |
+
+### A note on claims
+
+The page is written to everyday comfort and routine, never to treatment outcomes.
+When you add ingredients, keep each `note` to what the pack itself says. Do not
+describe what an ingredient does in the body unless the manufacturer states it,
+and never imply ArthroLive treats, cures or reverses any condition.
 
 ## Commands
 

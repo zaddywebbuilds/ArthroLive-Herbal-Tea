@@ -1,0 +1,52 @@
+---
+import Img from './Img.astro';
+import Icon from './Icon.astro';
+
+/**
+ * The secondary audience: adults buying for a parent or grandparent.
+ * They are not searching for their own symptoms, so nothing above speaks
+ * to them directly. This also gives the ads a second angle to run.
+ */
+---
+<section class="section-y bg-white">
+  <div class="wrap">
+    <div class="overflow-hidden rounded-card border border-line bg-cream">
+      <div class="grid items-center gap-0 md:grid-cols-[1fr_1.1fr]">
+        <Img
+          name="grandmother-playing-with-grandchildren"
+          alt="Grandmother playing a ball game with her two grandchildren in a sunny compound"
+          ratio="16/10"
+          sizes="(min-width: 768px) 46vw, 100vw"
+          class="md:!aspect-[4/3]"
+        />
+        <div class="p-4 sm:p-6">
+          <span class="eyebrow">Buying For Someone Else?</span>
+          <h2 class="h-section mt-1.5 text-teal-dark">
+            Give Someone You Love a Little Extra Care.
+          </h2>
+          <p class="mt-2 max-w-[46ch] text-ink-muted">
+            Whether it's your mother, your father or your grandparents, you can make their
+            everyday comfort a priority. Order to their address and we will call them to
+            arrange the delivery.
+          </p>
+          <ul class="mt-3 space-y-1.5">
+            {[
+              'Deliver straight to their house, anywhere in Ghana',
+              'Add your own number so we can reach you too',
+              'They pay nothing: settle it with the courier yourself',
+            ].map((point) => (
+              <li class="flex gap-2 text-[14.5px] leading-snug">
+                <Icon name="check" size={17} class="mt-0.5 shrink-0 text-green" stroke={2.5} />
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
+          <a href="#packages" data-track-cta="gift" class="btn-outline mt-4 w-full sm:w-auto">
+            Send Them a Pack
+            <Icon name="arrow-right" size={18} />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

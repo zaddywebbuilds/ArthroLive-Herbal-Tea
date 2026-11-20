@@ -44,9 +44,9 @@ const errCls = 'mt-1 hidden text-[13px] font-medium text-red-600';
         <fieldset class="border-0 p-0">
           <legend class="mb-2 font-display text-[15px] font-extrabold text-teal-dark">1. Choose your package</legend>
           <div class="grid gap-2 sm:grid-cols-3">
-            {site.packages.map((p, i) => (
+            {site.packages.map((p) => (
               <label class="relative flex cursor-pointer flex-col rounded-[12px] border border-line bg-white p-3 transition has-[:checked]:border-teal has-[:checked]:bg-teal-soft/60 has-[:checked]:ring-2 has-[:checked]:ring-teal/25">
-                <input type="radio" name="package" value={p.id} class="sr-only" checked={i === 1} />
+                <input type="radio" name="package" value={p.id} class="sr-only" />
                 <span class="text-[14.5px] font-extrabold text-teal-dark">{p.name}</span>
                 <span class="text-[13px] text-ink-muted">{p.teaQty} tea + {p.balmQty} balm</span>
                 <span class="mt-1 font-display text-[17px] font-extrabold text-green">{formatPrice(p.price)}</span>
@@ -63,15 +63,10 @@ const errCls = 'mt-1 hidden text-[13px] font-medium text-red-600';
               <input class={field} type="text" id="fullName" name="fullName" autocomplete="name" required placeholder="e.g. Ama Mensah" />
               <p class={errCls} data-error-for="fullName"></p>
             </div>
-            <div>
+            <div class="sm:col-span-2">
               <label class={label} for="phone">Phone number <span class="text-red-600">*</span></label>
               <input class={field} type="tel" id="phone" name="phone" inputmode="tel" autocomplete="tel" required placeholder="024 123 4567" />
               <p class={errCls} data-error-for="phone"></p>
-            </div>
-            <div>
-              <label class={label} for="altPhone">Alternative phone <span class="font-medium text-ink-muted">(optional)</span></label>
-              <input class={field} type="tel" id="altPhone" name="altPhone" inputmode="tel" placeholder="055 987 6543" />
-              <p class={errCls} data-error-for="altPhone"></p>
             </div>
             <div>
               <label class={label} for="region">Region <span class="text-red-600">*</span></label>
@@ -92,8 +87,8 @@ const errCls = 'mt-1 hidden text-[13px] font-medium text-red-600';
               <p class={errCls} data-error-for="address"></p>
             </div>
             <div class="sm:col-span-2">
-              <label class={label} for="landmark">Nearest landmark <span class="text-red-600">*</span></label>
-              <input class={field} type="text" id="landmark" name="landmark" required placeholder="e.g. Opposite the Shell filling station" />
+              <label class={label} for="landmark">Nearest landmark <span class="font-medium text-ink-muted">(optional)</span></label>
+              <input class={field} type="text" id="landmark" name="landmark" placeholder="e.g. Opposite the Shell filling station" />
               <p class={errCls} data-error-for="landmark"></p>
             </div>
           </div>
@@ -238,13 +233,10 @@ const errCls = 'mt-1 hidden text-[13px] font-medium text-red-600';
         if (!v.trim()) return 'Please enter your phone number.';
         return normalisePhone(v) ? '' : 'Enter a valid Ghana number, e.g. 024 123 4567.';
       },
-      altPhone: function (v) {
-        return (!v.trim() || normalisePhone(v)) ? '' : 'Enter a valid Ghana number or leave this empty.';
-      },
       region: function (v) { return v ? '' : 'Please select your region.'; },
       city: function (v) { return v.trim().length >= 2 ? '' : 'Please enter your city or town.'; },
       address: function (v) { return v.trim().length >= 6 ? '' : 'Please give the address we should deliver to.'; },
-      landmark: function (v) { return v.trim().length >= 3 ? '' : 'A nearby landmark helps the courier find you.'; }
+      landmark: function () { return ''; }
     };
 
     function showFieldError(name, message) {
@@ -392,7 +384,6 @@ const errCls = 'mt-1 hidden text-[13px] font-medium text-red-600';
         customer: {
           fullName: form.fullName.value.trim(),
           phone: normalisePhone(form.phone.value),
-          altPhone: form.altPhone.value.trim() ? normalisePhone(form.altPhone.value) : '',
           region: form.region.value,
           city: form.city.value.trim(),
           address: form.address.value.trim(),

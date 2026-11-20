@@ -5,9 +5,10 @@
   "scripts": {
     "images": "node scripts/build-images.mjs",
     "dev": "astro dev",
-    "build": "npm run images && astro build",
+    "build": "npm run images && astro build && npm run readiness",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "readiness": "node scripts/check-readiness.mjs"
   },
   "type": "module",
   "dependencies": {

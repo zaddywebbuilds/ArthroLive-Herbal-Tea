@@ -1,6 +1,7 @@
 ---
 import Logo from './Logo.astro';
 import { withBase, BASE } from '../lib/url';
+import { hasIngredients } from '../config/site';
 
 // On the legal pages these anchors must point back at the sales page.
 const here = Astro.url.pathname.replace(/\/$/, '');
@@ -15,6 +16,7 @@ const to = (hash: string) => (onHome ? hash : withBase('/') + hash);
 
     <nav aria-label="Primary" class="hidden md:block">
       <ul class="flex items-center gap-7 text-[15px] font-medium text-ink-muted">
+        {hasIngredients && <li><a href={to('#ingredients')} class="hover:text-teal">What's Inside</a></li>}
         <li><a href={to('#benefits')} class="hover:text-teal">Benefits</a></li>
         <li><a href={to('#how-to-use')} class="hover:text-teal">How to Use</a></li>
         <li><a href={to('#faqs')} class="hover:text-teal">FAQs</a></li>

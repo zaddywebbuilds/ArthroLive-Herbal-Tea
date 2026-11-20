@@ -1,10 +1,12 @@
 ---
 import Icon from './Icon.astro';
 import PackVisual from './PackVisual.astro';
-import { formatPrice, type Package } from '../config/site';
+import { formatPrice, perSetPrice, supplyDuration, type Package } from '../config/site';
 
 interface Props { pkg: Package; featured?: boolean }
 const { pkg, featured = false } = Astro.props;
+const perSet = perSetPrice(pkg);
+const lasts = supplyDuration(pkg);
 ---
 <article
   class={`relative flex flex-col rounded-card bg-white ${
@@ -40,7 +42,10 @@ const { pkg, featured = false } = Astro.props;
       </div>
     </div>
 
-    <p class="mt-2 text-[13.5px] text-ink-muted md:text-[14px]">{pkg.blurb}</p>
+    <p class="mt-1.5 text-[13px] font-semibold text-ink-muted md:text-[13.5px]">
+      {formatPrice(Math.round(perSet))} per tea + balm set{lasts ? ` · ${lasts}` : ''}
+    </p>
+    <p class="mt-1.5 text-[13.5px] text-ink-muted md:text-[14px]">{pkg.blurb}</p>
 
     <ul class="mt-2.5 space-y-1 border-t border-line pt-2.5 text-[13.5px] md:text-[14px]">
       <li class="flex gap-2"><Icon name="check" size={15} class="mt-0.5 shrink-0 text-green" stroke={2.5} /><span>{pkg.teaQty * 20} tea bags and {pkg.balmQty} &times; 50g balm {pkg.balmQty > 1 ? 'jars' : 'jar'}</span></li>

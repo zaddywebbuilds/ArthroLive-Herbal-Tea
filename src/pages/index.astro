@@ -6,9 +6,12 @@ import Hero from '../components/Hero.astro';
 import Symptoms from '../components/Symptoms.astro';
 import Agitation from '../components/Agitation.astro';
 import Products from '../components/Products.astro';
-import Benefits from '../components/Benefits.astro';
+import Ingredients from '../components/Ingredients.astro';
+import ProductProof from '../components/ProductProof.astro';
 import HowToUse from '../components/HowToUse.astro';
+import Benefits from '../components/Benefits.astro';
 import LifestyleGallery from '../components/LifestyleGallery.astro';
+import GiftBuyer from '../components/GiftBuyer.astro';
 import Trust from '../components/Trust.astro';
 import Pricing from '../components/Pricing.astro';
 import OrderForm from '../components/OrderForm.astro';
@@ -16,7 +19,7 @@ import Faq, { faqs } from '../components/Faq.astro';
 import FinalCta from '../components/FinalCta.astro';
 import Footer from '../components/Footer.astro';
 import StickyCta from '../components/StickyCta.astro';
-import { site } from '../config/site';
+import { site, publishableTestimonials } from '../config/site';
 import { withBase } from '../lib/url';
 
 const origin = Astro.site?.origin ?? site.url;
@@ -46,6 +49,14 @@ const organization = {
     : {}),
 };
 
+// Only real, consented reviews become Review nodes. No aggregateRating is
+// emitted anywhere, because there is no rating data to aggregate.
+const reviewNodes = publishableTestimonials.map((t) => ({
+  '@type': 'Review',
+  author: { '@type': 'Person', name: t.name },
+  reviewBody: t.quote,
+}));
+
 const product = {
   '@type': 'Product',
   '@id': `${HOME}#product`,
@@ -63,6 +74,7 @@ const product = {
     { '@type': 'Product', name: 'ArthroLive Herbal Tea', description: '20 herbal tea bags' },
     { '@type': 'Product', name: 'ArthroLive Herbal Balm', description: '50g topical massage balm' },
   ],
+  ...(reviewNodes.length ? { review: reviewNodes } : {}),
   offers: {
     '@type': 'AggregateOffer',
     priceCurrency: site.currency,
@@ -120,17 +132,35 @@ const schema = { '@context': 'https://schema.org', '@graph': [organization, webs
   <AnnouncementBar />
   <Header />
   <main id="main">
+    {/* 01 symptoms, product, price and CTA together */}
     <Hero />
+    {/* 02 pain recognition, kept short */}
     <Symptoms />
+    {/* 03 one emotional beat */}
     <Agitation />
+    {/* 04 introduce the two product routine */}
     <Products />
-    <Benefits />
+    {/* 05 what is actually inside (hidden until supplier data is entered) */}
+    <Ingredients />
+    {/* 06 real photos and video of the physical product (hidden until supplied) */}
+    <ProductProof />
+    {/* 07 how to use it */}
     <HowToUse />
+    {/* 08 why this routine */}
+    <Benefits />
+    {/* 09 customer aspirations */}
     <LifestyleGallery />
+    {/* 10 the secondary audience: buying for a parent */}
+    <GiftBuyer />
+    {/* 11 social proof, or verifiable facts until reviews exist */}
     <Trust />
+    {/* 12 packages */}
     <Pricing />
+    {/* 13 order */}
     <OrderForm />
+    {/* 14 remaining objections */}
     <Faq />
+    {/* 15 final push */}
     <FinalCta />
   </main>
   <Footer />

@@ -18,16 +18,12 @@ const trust = [
   <div class="wrap relative grid items-center gap-3.5 py-4 md:grid-cols-[1.05fr_1fr] md:gap-10 md:py-11">
     <div class="order-2 md:order-1">
       <span class="eyebrow">{site.tagline}</span>
-      <h1 class="mt-1.5 text-[clamp(1.625rem,1.05rem+2.9vw,3rem)] font-extrabold text-teal-dark">
-        When Every Step Hurts, Even the Simplest Things Become Difficult.
+      <h1 class="mt-1.5 text-[clamp(1.5rem,0.95rem+2.7vw,2.75rem)] font-extrabold text-teal-dark">
+        Tired of Stiff Knees, Aching Joints and Burning Feet Interrupting Your Everyday Life?
       </h1>
-      <p class="mt-2.5 max-w-[48ch] text-[1rem] text-ink-muted md:mt-3 md:text-[1.125rem]">
-        Stiff knees in the morning. Aching joints after work. Burning feet at night.
-        Sometimes, even standing up after sitting feels like a battle.
-      </p>
-      <p class="mt-2.5 max-w-[48ch] text-[1rem] font-medium text-ink md:mt-3 md:text-[1.125rem]">
-        Meet ArthroLive, a herbal tea and massage balm combination made for your
-        everyday comfort and wellness routine.
+      <p class="mt-2.5 max-w-[50ch] text-[1rem] text-ink-muted md:mt-3 md:text-[1.125rem]">
+        Meet <strong class="font-bold text-ink">ArthroLive</strong>, a herbal tea and massage balm
+        combination made for your everyday joint and body comfort. One you drink. One you massage in.
       </p>
 
       <div class="mt-4 flex flex-wrap items-center gap-3 md:mt-5">
@@ -35,13 +31,13 @@ const trust = [
           Order ArthroLive Today
           <Icon name="arrow-right" size={19} />
         </a>
-        <span class="text-[15px] font-medium text-ink-muted">
-          From {formatPrice(lowestPrice)}
-          {site.delivery.payOnDelivery && <span class="text-green"> &middot; Payment on Delivery Available</span>}
-        </span>
       </div>
+      <p class="mt-2 text-[15px] font-semibold text-green">
+        From {formatPrice(lowestPrice)}
+        {site.delivery.payOnDelivery && <span> &middot; Pay only when it arrives</span>}
+      </p>
 
-      <ul class="mt-6 grid grid-cols-3 gap-2 border-t border-line pt-4 sm:gap-3">
+      <ul class="mt-5 grid grid-cols-3 gap-2 border-t border-line pt-3.5 sm:gap-3">
         {trust.map((t) => (
           <li class="flex items-start gap-2">
             <Icon name={t.icon} size={19} class="mt-0.5 shrink-0 text-green" />

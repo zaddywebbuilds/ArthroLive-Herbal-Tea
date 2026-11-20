@@ -1,0 +1,98 @@
+---
+import Icon from './Icon.astro';
+import { site, hasIngredients } from '../config/site';
+
+/**
+ * What is actually in the pack.
+ *
+ * This renders ONLY from site.ingredients, which must be transcribed from
+ * the physical pack or the supplier's spec sheet. Nothing here is written
+ * from general knowledge, and no ingredient is given a claimed effect in
+ * the body unless the pack itself states one (as `note`).
+ *
+ * While both lists are empty the section does not render at all, so an
+ * unfinished page never shows an empty or invented ingredient panel.
+ */
+const { teaIntro, tea, balmIntro, balm, precautions, registration } = site.ingredients;
+---
+{hasIngredients && (
+  <section id="ingredients" class="section-y bg-white scroll-mt-[60px]">
+    <div class="wrap">
+      <div class="max-w-[58ch]">
+        <span class="eyebrow">What's Inside</span>
+        <h2 class="h-section mt-1.5 text-teal-dark">Know Exactly What You Are Taking</h2>
+        <p class="mt-2 text-ink-muted">
+          Both lists below are printed on the packs themselves. If you take prescribed
+          medication, show this page or the pack to your doctor or pharmacist before you
+          start.
+        </p>
+      </div>
+
+      <div class="mt-4 grid gap-3 md:grid-cols-2 md:gap-5">
+        {tea.length > 0 && (
+          <article class="card p-4 sm:p-5">
+            <div class="flex items-center gap-2.5">
+              <span class="flex h-9 w-9 items-center justify-center rounded-full bg-green-soft text-green">
+                <Icon name="cup-soda" size={19} />
+              </span>
+              <h3 class="text-lg font-extrabold text-teal-dark">{site.products.tea.name}</h3>
+            </div>
+            {teaIntro && <p class="mt-2 text-[14.5px] text-ink-muted">{teaIntro}</p>}
+            <ul class="mt-3 divide-y divide-line border-t border-line">
+              {tea.map((i) => (
+                <li class="py-2">
+                  <p class="text-[15px] font-bold text-ink">{i.name}</p>
+                  {i.note && <p class="mt-0.5 text-[13.5px] leading-snug text-ink-muted">{i.note}</p>}
+                </li>
+              ))}
+            </ul>
+          </article>
+        )}
+
+        {balm.length > 0 && (
+          <article class="card p-4 sm:p-5">
+            <div class="flex items-center gap-2.5">
+              <span class="flex h-9 w-9 items-center justify-center rounded-full bg-teal-soft text-teal">
+                <Icon name="hand" size={19} />
+              </span>
+              <h3 class="text-lg font-extrabold text-teal-dark">{site.products.balm.name}</h3>
+            </div>
+            {balmIntro && <p class="mt-2 text-[14.5px] text-ink-muted">{balmIntro}</p>}
+            <ul class="mt-3 divide-y divide-line border-t border-line">
+              {balm.map((i) => (
+                <li class="py-2">
+                  <p class="text-[15px] font-bold text-ink">{i.name}</p>
+                  {i.note && <p class="mt-0.5 text-[13.5px] leading-snug text-ink-muted">{i.note}</p>}
+                </li>
+              ))}
+            </ul>
+          </article>
+        )}
+      </div>
+
+      {precautions.length > 0 && (
+        <div class="mt-3 rounded-card border border-gold/40 bg-gold-soft px-4 py-3">
+          <h3 class="flex items-center gap-2 font-display text-[14.5px] font-extrabold text-ink">
+            <Icon name="triangle-alert" size={17} class="text-gold" />
+            Before you use it
+          </h3>
+          <ul class="mt-1.5 space-y-1">
+            {precautions.map((p) => (
+              <li class="flex gap-2 text-[14px] leading-snug text-ink">
+                <span class="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-ink/50"></span>
+                <span>{p}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {registration && (
+        <p class="mt-3 inline-flex items-center gap-2 rounded-full bg-green-soft px-3.5 py-1.5 text-[14px] font-bold text-green">
+          <Icon name="badge-check" size={16} />
+          {registration.authority} registration {registration.number}
+        </p>
+      )}
+    </div>
+  </section>
+)}

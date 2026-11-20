@@ -1,0 +1,65 @@
+---
+import Img from './Img.astro';
+import { site, hasProof } from '../config/site';
+import manifest from '../data/images.json';
+
+/**
+ * Real photographs and clips of the physical product.
+ *
+ * Studio renders show what a pack looks like; they do not prove it exists
+ * or that anyone in Ghana can receive one. This section is for phone
+ * footage: an unboxing, the tea bags close up, the balm being opened.
+ *
+ * Renders only from site.proof.media, so it is hidden until real files
+ * are added. Videos are muted, inline and preload metadata only, so the
+ * section costs almost nothing until someone presses play.
+ */
+const { heading, intro, media } = site.proof;
+const known = (key: string) => Object.prototype.hasOwnProperty.call(manifest, key);
+---
+{hasProof && (
+  <section id="proof" class="section-y bg-cream scroll-mt-[60px]">
+    <div class="wrap">
+      <div class="max-w-[58ch]">
+        <span class="eyebrow">Proof</span>
+        <h2 class="h-section mt-1.5 text-teal-dark">{heading}</h2>
+        {intro && <p class="mt-2 text-ink-muted">{intro}</p>}
+      </div>
+
+      <ul class="mt-3.5 grid grid-cols-2 gap-2.5 md:mt-5 md:grid-cols-3 md:gap-4">
+        {media.map((m) => (
+          <li class="card overflow-hidden">
+            {m.type === 'video' ? (
+              <video
+                class="aspect-[4/3] w-full bg-ink object-cover"
+                src={m.src}
+                poster={m.poster}
+                controls
+                muted
+                playsinline
+                preload="metadata"
+                aria-label={m.alt}
+              ></video>
+            ) : known(m.src) ? (
+              <Img
+                name={m.src as keyof typeof manifest}
+                alt={m.alt}
+                ratio="4/3"
+                sizes="(min-width: 768px) 32vw, 46vw"
+              />
+            ) : (
+              <p class="p-3 text-[13px] text-red-700">
+                Missing image "{m.src}". Add it to source-images/ and run npm run images.
+              </p>
+            )}
+            {m.caption && (
+              <p class="px-3 py-2 text-[13px] font-medium leading-snug text-ink-muted sm:text-[14px]">
+                {m.caption}
+              </p>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}
