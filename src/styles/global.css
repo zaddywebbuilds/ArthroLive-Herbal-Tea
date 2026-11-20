@@ -88,9 +88,17 @@
   padding-inline: 16px;
 }
 
+/*
+ * Vertical rhythm between sections.
+ *
+ * This is doubled in practice: the gap a visitor sees is one section's
+ * padding-bottom plus the next one's padding-top. Sections alternate
+ * background colours, so any excess reads as a dead band of flat colour.
+ * 14/24 here means a 28px gap on mobile and 48px on desktop.
+ */
 @utility section-y {
-  padding-block: 18px;
-  @media (width >= 768px) { padding-block: 40px; }
+  padding-block: 14px;
+  @media (width >= 768px) { padding-block: 24px; }
 }
 
 /* Primary call to action */
