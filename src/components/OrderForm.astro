@@ -4,6 +4,9 @@ import { site, GHANA_REGIONS, formatPrice } from '../config/site';
 
 const cfg = {
   endpoint: site.order.endpoint,
+  mode: site.order.mode,
+  cf7Email: site.order.cf7Email,
+  cf7UnitTag: site.order.cf7UnitTag,
   contentType: site.order.contentType,
   secret: site.order.secret,
   minFillSeconds: site.order.minFillSeconds,
@@ -392,22 +395,64 @@ const errCls = 'mt-1 hidden text-[13px] font-medium text-red-600';
         meta: { submittedAt: new Date().toISOString(), page: window.location.href }
       };
 
-      fetch(cfg.endpoint, {
-        method: 'POST',
-        // text/plain keeps this a "simple" request with no CORS preflight,
-        // which is what Google Apps Script needs. The body is still JSON.
-        headers: { 'Content-Type': cfg.contentType },
-        body: JSON.stringify(payload)
-      }).then(function (res) {
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        return res.text();
-      }).then(function (text) {
-        // Apps Script answers 200 even when it rejects an order, so the
-        // body decides. A non-JSON body from another backend counts as OK.
-        var body = null;
-        try { body = JSON.parse(text); } catch (e) { /* not JSON, fine */ }
-        if (body && body.ok === false) throw new Error(body.error || 'Rejected');
+      var request;
+      if (cfg.mode === 'cf7') {
+        // Contact Form 7 REST API. The site is served from the same origin
+        // as WordPress, so this is a same-origin POST with no CORS to worry
+        // about. CF7 only accepts the fields its form actually defines, so
+        // the order detail goes into the message body as plain text.
+        var c = payload.customer;
+        var lines = [
+          'Package: ' + pkg.name + ' (' + pkg.teaQty + ' tea, ' + pkg.balmQty + ' balm)',
+          'Total: ' + cfg.symbol + (pkg.price + fee),
+          'Payment: ' + payload.delivery.method,
+          '',
+          'Name: ' + c.fullName,
+          'Phone: ' + c.phone,
+          'Region: ' + c.region,
+          'Town: ' + c.city,
+          'Address: ' + c.address,
+          'Landmark: ' + (c.landmark || '-'),
+          '',
+          'Confirmed ready to receive and pay on delivery.'
+        ].join('\n');
 
+        var fd = new FormData();
+        fd.append('your-name', c.fullName);
+        fd.append('your-email', cfg.cf7Email);
+        fd.append('your-subject', 'ArthroLive Order - ' + pkg.name);
+        fd.append('your-message', lines);
+        fd.append('_wpcf7_unit_tag', cfg.cf7UnitTag);
+
+        request = fetch(cfg.endpoint, { method: 'POST', body: fd })
+          .then(function (res) { return res.json(); })
+          .then(function (body) {
+            // CF7 answers 200 for validation_failed, mail_failed and spam
+            // too, so only mail_sent counts as a real order.
+            if (!body || body.status !== 'mail_sent') {
+              throw new Error((body && body.message) || 'Not accepted');
+            }
+          });
+      } else {
+        request = fetch(cfg.endpoint, {
+          method: 'POST',
+          // text/plain keeps this a "simple" request with no CORS preflight,
+          // which is what Google Apps Script needs. The body is still JSON.
+          headers: { 'Content-Type': cfg.contentType },
+          body: JSON.stringify(payload)
+        }).then(function (res) {
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          return res.text();
+        }).then(function (text) {
+          // Apps Script answers 200 even when it rejects an order, so the
+          // body decides. A non-JSON body from another backend counts as OK.
+          var body = null;
+          try { body = JSON.parse(text); } catch (e) { /* not JSON, fine */ }
+          if (body && body.ok === false) throw new Error(body.error || 'Rejected');
+        });
+      }
+
+      request.then(function () {
         submitted = true;
         form.hidden = true;
         successBox.hidden = false;

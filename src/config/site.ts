@@ -29,7 +29,7 @@ export const site = {
   brand: 'ArthroLive',
   tagline: 'Herbal Tea + Soothing Massage Balm',
   /** Canonical production URL. Update when the domain is live. */
-  url: 'https://arthrolive.com.gh',
+  url: 'https://nostalgiasales.com',
   locale: 'en_GH',
   country: 'Ghana',
 
@@ -49,12 +49,12 @@ export const site = {
    *  element rather than showing a fake number.
    *  ------------------------------------------------------------------ */
   contact: {
-    phone: '',            // e.g. '+233 20 000 0000'
-    whatsapp: '',         // digits only, international format e.g. '233200000000'
-    email: '',            // e.g. 'orders@arthrolive.com.gh'
+    phone: '+233 59 721 0794',
+    whatsapp: '233597210794',
+    email: 'orders@nostalgiasales.com',
     hours: '',            // >>> CONFIRM <<< e.g. 'Monday to Saturday, 8am to 6pm'
-    company: 'ArthroLive Ghana',
-    address: '',          // e.g. 'Accra, Ghana'
+    company: 'Nostalgia Sales',
+    address: 'Ghana',
   } as Record<'phone' | 'whatsapp' | 'email' | 'hours' | 'company' | 'address', string>,
 
   /** ------------------------------------------------------------------
@@ -212,7 +212,28 @@ export const site = {
    *  While it is empty the form will NOT pretend an order succeeded.
    *  ------------------------------------------------------------------ */
   order: {
-    endpoint: '',          // >>> CONFIRM <<<  e.g. 'https://script.google.com/macros/s/AKfy.../exec'
+    /**
+     * 'cf7'  post to the Contact Form 7 REST API on the same WordPress
+     *        site. This is what the VeraFem funnel already uses, so orders
+     *        land in the same inbox and need no new infrastructure.
+     * 'json' post JSON to a Google Apps Script or similar (backend/SETUP.md).
+     */
+    mode: 'cf7' as 'cf7' | 'json',
+
+    /**
+     * CF7 form 194 on nostalgiasales.com, the same form the VeraFem page
+     * posts to. Orders are told apart by the subject line.
+     *
+     * To give ArthroLive its own form instead: duplicate the form in
+     * WP Admin > Contact, keep the four field names (your-name, your-email,
+     * your-subject, your-message), then put the new ID in this URL and in
+     * cf7UnitTag.
+     */
+    endpoint: 'https://nostalgiasales.com/wp-json/contact-form-7/v1/contact-forms/194/feedback',
+
+    /** Where CF7 mails the order. Must match the form's own Mail settings. */
+    cf7Email: 'orders@nostalgiasales.com',
+    cf7UnitTag: 'wpcf7-f194-arthrolive',
 
     /**
      * Content type for the POST body. The body is always JSON.
